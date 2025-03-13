@@ -1,0 +1,9 @@
+/* In your global CSS file (e.g., styles.css, main.css) */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --background-color: #f8f9fa;
+    --text-color: #333;
+    --button-color: #28a745;
+  }
+  
