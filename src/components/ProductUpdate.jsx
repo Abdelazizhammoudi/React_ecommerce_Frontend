@@ -4,6 +4,8 @@ import { BASE_URL } from "../constants";
 import useFetch from "../hooks/useFetch";
 import useImageUpload from "../hooks/useImageUpload";
 import "../assets/update-product.css"; // Ensure the correct CSS file is imported
+import IconButton from '@mui/material/IconButton';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 // CSRF token helper function
 function getCookie(name) {
@@ -221,23 +223,31 @@ function ProductUpdate() {
 
       <div className="image-section">
         <h3>Product Images</h3>
-        <div className="image-grid">
-          {product.images.map(image => (
-            <div key={image.id} className="image-card">
-              <img
-                src={`${BASE_URL}${image.image_url}`}
-                alt={product.name}
-                className="product-image"
-              />
-              <button
-                type="button"
-                className="delete-image"
-                onClick={() => handleDeleteImage(image.id)}
-              >
-                Delete Image
-              </button>
-            </div>
-          ))}
+
+        <div className="product-images">
+          {product.images && product.images.length > 0 ? (
+            product.images.map((image) => (
+              <div key={image.id} className="image-container">
+                <img
+                  src={image.image} // Use the full image URL from the API
+                  alt={`${product.name}`}
+                  className="product-image"
+                  onError={(e) => {
+                    e.target.src = "path/to/fallback/image.jpg"; // Fallback image
+                  }}
+                />
+                <IconButton
+                  aria-label="delete"
+                  className="delete-image"
+                  onClick={() => handleDeleteImage(image.id)}
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </div>
+            ))
+          ) : (
+            <p>No images available</p>
+          )}
         </div>
 
         <div className="upload-section">
