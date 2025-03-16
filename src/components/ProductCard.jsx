@@ -119,8 +119,19 @@ const ProductCard = ({ product, onDelete, onUpdate }) => {
           <h3>{product.name}</h3>
           <p>{product.description}</p>
           <p><strong>Price:</strong> ${product.price}</p>
+          <div className="product-images">
+            {product.images.map((image) => (
+              <img
+                key={image.id}
+                src={`${BASE_URL}${image.image}`}
+                alt={product.name}
+                className="product-image"
+              />
+            ))}
+          </div>
           <button onClick={() => setIsEditing(true)}>Edit</button>
           <button onClick={handleDelete}>Delete</button>
+          
         </div>
       )}
     </div>

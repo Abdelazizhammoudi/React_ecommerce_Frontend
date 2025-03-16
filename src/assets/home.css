@@ -86,6 +86,7 @@
 }
 
 .image-card {
+  display: flex;
   position: relative;
   border: 1px solid #eee;
   border-radius: 4px;
@@ -93,7 +94,7 @@
 }
 
 .image-card:hover .product-image {
-  transform: scale(1.05);
+  transform: scale(3);
 }
 
 .delete-image {

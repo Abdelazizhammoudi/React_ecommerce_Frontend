@@ -15,7 +15,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/addProduct" element={<ProductForm />} />
             <Route path="/product/:id" element={<ProductDetail />} /> {/* Dynamic route for product details */}
-            <Route path="/product/update/:id" element={<ProductUpdate />} /> {/* Dynamic route for updating a product */}
+            <Route path="/product/:id/update/" element={<ProductUpdate />} /> {/* Dynamic route for updating a product */}
           </Routes>
         </Router>
   );
