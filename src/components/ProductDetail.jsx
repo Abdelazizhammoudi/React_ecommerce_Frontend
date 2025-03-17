@@ -4,6 +4,7 @@ import { BASE_URL } from "../constants";
 import useFetch from "../hooks/useFetch";
 import "../assets/product-detail.css"; // Ensure the correct CSS file is imported
 
+
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();

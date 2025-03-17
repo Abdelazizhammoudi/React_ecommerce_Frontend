@@ -6,6 +6,8 @@ import useImageUpload from "../hooks/useImageUpload";
 import "../assets/update-product.css"; // Ensure the correct CSS file is imported
 import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Button from '@mui/material/Button';
+import CancelIcon from '@mui/icons-material/Cancel';
 
 // CSRF token helper function
 function getCookie(name) {
@@ -236,12 +238,12 @@ function ProductUpdate() {
                     e.target.src = "path/to/fallback/image.jpg"; // Fallback image
                   }}
                 />
-                <IconButton
+               <IconButton
                   aria-label="delete"
                   className="delete-image"
                   onClick={() => handleDeleteImage(image.id)}
                 >
-                  <DeleteIcon />
+                  <CancelIcon />
                 </IconButton>
               </div>
             ))
@@ -280,13 +282,15 @@ function ProductUpdate() {
 
       <div className="danger-zone">
         <h3>Danger Zone</h3>
-        <button
-          type="button"
+
+        <Button
+          variant="outlined"
           className="delete-product-button"
           onClick={handleDeleteProduct}
+          startIcon={<DeleteIcon />}
         >
-          Delete Entire Product
-        </button>
+          Delete
+        </Button>
       </div>
 
       {(errorMessage || uploadError) && (

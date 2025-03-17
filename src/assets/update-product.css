@@ -1,5 +1,5 @@
 .update-product-container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -8,7 +8,7 @@
 }
 
 .update-product-container h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
   margin-bottom: 20px;
   color: #333;
   text-align: center;
@@ -65,24 +65,76 @@
   background-color: #e53935;
 }
 
-.update-product-container .image-preview {
-  display: flex;
-  flex-wrap: wrap;
+.update-product-container .image-section {
+  margin-top: 20px;
+}
+
+.update-product-container .product-images {
+  display: relative;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   gap: 10px;
   margin-top: 10px;
 }
 
-.update-product-container .image-preview img {
-  width: 100px;
-  height: 100px;
+
+/* ===== Delete Button Styles ===== */
+.update-product-container .image-container {
+  position: relative;
+  display: inline-block;
+  margin: 5px;
+}
+
+
+.update-product-container .product-image {
+  width: 100%;
+  height: 150px;
   object-fit: cover;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
 }
 
-.update-product-container .image-preview img:hover {
+.update-product-container .product-image:hover {
   transform: scale(1.05);
+}
+/* Force the delete button to appear ABOVE the image */
+.update-product-container .delete-image {
+  position: absolute !important;
+  top: 5px !important;
+  right: 5px !important;
+  background-color: none !important; /* Solid red */
+  color: #ff4444 !important;
+  border-radius: 50% !important;
+  width: 24px !important;
+  height: 24px !important;
+  padding: 0 !important;
+  z-index: 1000 !important; /* Higher than image */
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.9;
+  transition: all 0.3s ease;
+}
+
+.update-product-container .delete-image:hover {
+  background-color: rgba(255, 0, 0, 1);
+}
+
+.update-product-container .upload-section {
+  margin-top: 20px;
+}
+
+.update-product-container .upload-button {
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.update-product-container .upload-button:hover {
+  background-color: #45a049;
 }
 
 .update-product-container .selected-files {
@@ -106,4 +158,27 @@
   padding: 20px;
   color: #666;
   font-size: 1.2rem;
+}
+
+.update-product-container .danger-zone {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff3f3;
+  border-radius: 8px;
+  border: 1px solid #ffcccc;
+}
+
+.update-product-container .delete-product-button {
+  padding: 10px 20px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.update-product-container .delete-product-button:hover {
+  background-color: #e53935;
 }
