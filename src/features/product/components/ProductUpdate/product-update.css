@@ -1,0 +1,65 @@
+.product-update-container {
+    max-width: 800px;
+    margin: var(--space-lg) auto;
+    padding: var(--space-md);
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: var(--space-md);
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: var(--space-sm);
+    font-weight: bold;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: var(--space-sm);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .image-section {
+    margin-top: var(--space-lg);
+  }
+  
+  .product-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: var(--space-sm);
+  }
+  
+  .image-container {
+    position: relative;
+  }
+  
+  .delete-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: var(--danger-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+  }
+  
+  .upload-section {
+    margin-top: var(--space-md);
+  }
+  
+  .error-message {
+    color: var(--danger-color);
+    background: #f8d7da;
+    padding: var(--space-sm);
+    border-radius: 4px;
+    margin-top: var(--space-md);
+  }

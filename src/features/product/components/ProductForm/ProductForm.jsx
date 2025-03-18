@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import "../assets/ProductForm.css";
-import Button from "@mui/material/Button";
-import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
-import { BASE_URL } from "../constants";
+import { BASE_URL } from "@/config/constants";
+import "@/styles/global.css";
+import "./product-form.css";
 
 function ProductForm() {
   const [product, setProduct] = useState({
@@ -22,9 +21,9 @@ function ProductForm() {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    setProduct((prevProduct) => ({
-      ...prevProduct,
-      images: [...prevProduct.images, ...files],
+    setProduct((prev) => ({
+      ...prev,
+      images: [...prev.images, ...files],
     }));
   };
 
@@ -47,16 +46,10 @@ function ProductForm() {
       const response = await fetch(`${BASE_URL}/product/add/`, {
         method: "POST",
         body: formData,
-        headers: {
-          "Accept": "application/json",
-        },
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to add product");
-      }
+      if (!response.ok) throw new Error("Failed to add product");
 
-      const data = await response.json();
       setSuccess("Product added successfully!");
       setProduct({ name: "", description: "", price: "", images: [] });
     } catch (err) {
@@ -68,65 +61,61 @@ function ProductForm() {
 
   return (
     <div className="product-form-container">
-      <h2 className="title">Add New Product</h2>
+      <h2>Add New Product</h2>
       <form onSubmit={handleSubmit} className="product-form">
-        <input
-          type="text"
-          name="name"
-          placeholder="Product Name"
-          value={product.name}
-          onChange={handleChange}
-          className="input-field"
-          required
-        />
-        <textarea
-          name="description"
-          placeholder="Description"
-          value={product.description}
-          onChange={handleChange}
-          className="input-field textarea"
-          required
-        />
-        <input
-          type="number"
-          name="price"
-          placeholder="Price"
-          value={product.price}
-          onChange={handleChange}
-          className="input-field"
-          required
-        />
+        <div className="form-group">
+          <label>Product Name:</label>
+          <input
+            type="text"
+            name="name"
+            value={product.name}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-        {/* Material UI Upload Button */}
-        <Button
-          component="label"
-          variant="contained"
-          startIcon={<AddPhotoAlternateIcon />}
-          className="upload-button"
-        >
-          Upload Images
+        <div className="form-group">
+          <label>Description:</label>
+          <textarea
+            name="description"
+            value={product.description}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Price (DZD):</label>
+          <input
+            type="number"
+            name="price"
+            value={product.price}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Upload Images:</label>
           <input
             type="file"
             multiple
-            accept="image/*"
-            className="visually-hidden-input"
             onChange={handleImageChange}
+            accept="image/*"
           />
-        </Button>
+        </div>
 
-        <button type="submit" className="submit-button" disabled={loading}>
+        <button type="submit" className="primary-button" disabled={loading}>
           {loading ? "Adding..." : "Add Product"}
         </button>
       </form>
 
-      {/* Display Messages */}
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {success && <p style={{ color: "green" }}>{success}</p>}
+      {error && <div className="error-message">{error}</div>}
+      {success && <div className="success-message">{success}</div>}
 
-      {/* Image Preview */}
       {product.images.length > 0 && (
-        <div className="preview-container">
-          <h3 className="preview-title">Preview:</h3>
+        <div className="image-preview">
+          <h3>Preview:</h3>
           <div className="preview-images">
             {product.images.map((image, index) => (
               <img
@@ -136,7 +125,7 @@ function ProductForm() {
                 className="preview-image"
               />
             ))}
-          </div>      
+          </div>
         </div>
       )}
     </div>

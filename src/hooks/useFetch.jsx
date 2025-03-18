@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { BASE_URL } from '../constants';
+import { BASE_URL } from '../config/constants';
 
 const useFetch = (endpoint, method = 'GET', body = null) => {
     const [data, setData] = useState(null);

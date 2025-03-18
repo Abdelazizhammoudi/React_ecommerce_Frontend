@@ -1,0 +1,16 @@
+:root {
+    /* Colors */
+    --primary-color: rgb(0, 128, 128);    /* Teal Green */
+    --primary-hover: rgb(0, 105, 105); /* Darker shade for hover */
+    --danger-color: #ff4444;              
+    --background-light: #f0f8ff;          /* Light blue background */
+    --text-dark: #333;
+    
+    /* Fonts */
+    --font-primary: 'Arial', sans-serif;
+    
+    /* Spacing */
+    --space-sm: 8px;
+    --space-md: 16px;
+    --space-lg: 24px;
+  }

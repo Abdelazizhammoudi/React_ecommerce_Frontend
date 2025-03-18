@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BASE_URL } from "../constants";
+import { BASE_URL } from "../config/constants";
 
 const useImageUpload = () => {
   const [errorMessage, setErrorMessage] = useState(null);

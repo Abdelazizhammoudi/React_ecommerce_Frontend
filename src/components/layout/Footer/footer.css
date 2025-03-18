@@ -1,0 +1,7 @@
+.footer {
+    text-align: center;
+    padding: var(--space-md);
+    background: var(--primary-color);
+    color: white;
+    margin-top: auto; /* Pushes footer to the bottom */
+  }
