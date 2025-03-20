@@ -18,7 +18,7 @@ function ProductDetail() {
       <h2>{product.name}</h2>
       <p>{product.description}</p>
       <p>
-        <strong>Price:</strong> ${product.price}
+        <strong>Price:</strong> DZD{product.price}
       </p>
 
       {/* Image Grid */}

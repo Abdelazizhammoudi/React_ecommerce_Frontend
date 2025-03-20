@@ -40,7 +40,7 @@ function Home() {
                 <img
                   src={product.images[0].image} // Display only the first image
                   alt={product.name}
-                  className="product-image"
+                  className="product-image-home"
                 />
               )}
               <h3>{product.name}</h3>

@@ -1,6 +1,5 @@
 .product-detail-container {
-  max-width: 50%;
-  display: flex;
+  max-width: 100%;
   margin: var(--space-lg) auto;
   padding: var(--space-md);
   background: white;
@@ -8,6 +7,16 @@
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Soft shadow */
   display: flex;
   flex-wrap: wrap;
+}
+.product-detail-container h1{
+  margin: 10px;
+  display: block
+  ;
+}
+
+.product-detail-container p{
+  margin: 10px;
+  display: block;
 }
 
 .product-info {
