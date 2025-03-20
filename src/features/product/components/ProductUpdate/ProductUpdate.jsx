@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { ProductService } from "@/services/productService";
 import useFetch from "@/hooks/useFetch";
 import useImageUpload from "@/hooks/useImageUpload";
-import Button from "@mui/material/Button"; // Import Material-UI Button
-import DeleteIcon from "@mui/icons-material/Delete"; // Import Delete icon
-import CloudUploadIcon from "@mui/icons-material/CloudUpload"; // Import upload icon
+import Button from "@mui/material/Button";
+import DeleteIcon from "@mui/icons-material/Delete";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import CloseIcon from "@mui/icons-material/Close"; // Import Close icon
 import "@/styles/global.css";
 import "./product-update.css";
 
@@ -107,9 +108,14 @@ function ProductUpdate() {
 
   return (
     <div className="product-update-container">
+      {/* Back Link */}
+      <Link to={`/product/${id}`} className="back-link">
+        &larr; Back to Product
+      </Link>
+
       <h2>Edit Product</h2>
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="product-form">
         <div className="form-group">
           <label>Product Name:</label>
           <input
@@ -132,7 +138,7 @@ function ProductUpdate() {
         </div>
 
         <div className="form-group">
-          <label>Price ($):</label>
+          <label>Price (DZD):</label>
           <input
             type="number"
             step="0.01"
@@ -151,19 +157,19 @@ function ProductUpdate() {
 
       <div className="image-section">
         <h3>Product Images</h3>
-        <div className="product-images">
+        <div className="product-images-update">
           {product.images.map((image) => (
-            <div key={image.id} className="image-container">
+            <div key={image.id} className="image-container-update">
               <img
                 src={image.image}
                 alt={`${product.name}`}
-                className="product-image"
+                className="product-image-update"
               />
               <button
-                className="delete-button"
+                className="delete-image-button"
                 onClick={() => handleDeleteImage(image.id)}
               >
-                Delete
+                <CloseIcon fontSize="small" />
               </button>
             </div>
           ))}
@@ -196,13 +202,14 @@ function ProductUpdate() {
         </div>
       </div>
 
-      {/* Simple Delete Button */}
+      {/* Delete Product Button */}
       <Button
+        className="delete-product-button"
         variant="contained"
-        color="error" // Red color
-        startIcon={<DeleteIcon />} // Add delete icon
+        color="error"
+        startIcon={<DeleteIcon />}
         onClick={handleDeleteProduct}
-        style={{ marginTop: "2rem" }} // Add some spacing
+        style={{ marginTop: "2rem" }}
       >
         Delete Product
       </Button>

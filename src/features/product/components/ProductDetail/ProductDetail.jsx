@@ -1,49 +1,69 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "@/hooks/useFetch";
-import "@/styles/global.css"; // Global styles
-import "./product-detail.css"; // Component-specific styles
+import "@/styles/global.css";
+import "./product-detail.css";
 
 function ProductDetail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: product, loading, error } = useFetch(`/product/${id}/`);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   if (loading) return <div className="loading">Loading product details...</div>;
   if (error) return <div className="error">{error}</div>;
   if (!product) return <div className="error">Product not found</div>;
 
+  const handleNextImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === product.images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const handlePrevImage = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? product.images.length - 1 : prevIndex - 1
+    );
+  };
+
   return (
     <div className="product-detail-container">
-      <h2>{product.name}</h2>
-      <p>{product.description}</p>
-      <p>
-        <strong>Price:</strong> DZD{product.price}
-      </p>
-
-      {/* Image Grid */}
-      <div className="product-images">
+      {/* Image Section */}
+      <div className="product-images-detail">
         {product.images && product.images.length > 0 ? (
-          product.images.map((image) => (
+          <>
             <img
-              key={image.id}
-              src={image.image}
+              key={product.images[currentImageIndex].id}
+              src={product.images[currentImageIndex].image}
               alt={`${product.name}`}
-              className="product-image"
-              loading="lazy" // Lazy load images
+              className="product-image-detail"
+              loading="lazy"
               onError={(e) => {
-                e.target.src = "path/to/fallback/image.jpg"; // Fallback image
+                e.target.src = "path/to/fallback/image.jpg";
               }}
             />
-          ))
+            <button className="nav-button prev" onClick={handlePrevImage}>
+              &lt;
+            </button>
+            <button className="nav-button next" onClick={handleNextImage}>
+              &gt;
+            </button>
+          </>
         ) : (
           <p>No images available</p>
         )}
       </div>
 
+      {/* Product Info Section */}
+      <div className="product-info">
+        <h2>{product.name}</h2>
+        <p>{product.description}</p>
+        <p className="price">DZD {product.price}</p>
+      </div>
+
       {/* Update Button */}
       <button
-        className="primary-button" // Added class for styling
+        className="primary-button"
         onClick={() => navigate(`/product/${id}/update`)}
       >
         Update Product
