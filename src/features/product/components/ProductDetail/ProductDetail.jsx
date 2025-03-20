@@ -58,7 +58,7 @@ function ProductDetail() {
       <div className="product-info">
         <h2>{product.name}</h2>
         <p>{product.description}</p>
-        <p className="price">DZD {product.price}</p>
+        <p className="price">{product.price} DZD </p>
       </div>
 
       {/* Update Button */}
