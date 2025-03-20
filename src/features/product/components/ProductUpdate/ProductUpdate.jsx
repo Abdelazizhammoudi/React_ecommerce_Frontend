@@ -5,6 +5,7 @@ import useFetch from "@/hooks/useFetch";
 import useImageUpload from "@/hooks/useImageUpload";
 import Button from "@mui/material/Button"; // Import Material-UI Button
 import DeleteIcon from "@mui/icons-material/Delete"; // Import Delete icon
+import CloudUploadIcon from "@mui/icons-material/CloudUpload"; // Import upload icon
 import "@/styles/global.css";
 import "./product-update.css";
 
@@ -180,15 +181,17 @@ function ProductUpdate() {
           <label htmlFor="image-upload" className="upload-button">
             Choose New Images
           </label>
+
           {newImages.length > 0 && (
-            <button
-              type="button"
-              className="primary-button"
+            <Button
+              variant="contained"
+              startIcon={<CloudUploadIcon />}
+              className="mui-upload-button"
               onClick={handleUploadImages}
               disabled={isUploading}
             >
-              {isUploading ? "Uploading..." : "Upload Selected Images"}
-            </button>
+              {isUploading ? "Uploading..." : "Upload "}
+            </Button>
           )}
         </div>
       </div>

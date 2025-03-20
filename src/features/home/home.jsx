@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BASE_URL } from "@/config/constants";
-import ProductCard from "@/features/product/components/ProductCard/ProductCard";
+import { Link } from "react-router-dom";
 import "@/styles/global.css";
 import "./home.css";
 
@@ -34,7 +34,20 @@ function Home() {
       <h2>Product List</h2>
       <div className="product-list">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <div key={product.id} className="product-card">
+            <Link to={`/product/${product.id}`} className="product-link">
+              {product.images && product.images.length > 0 && (
+                <img
+                  src={product.images[0].image} // Display only the first image
+                  alt={product.name}
+                  className="product-image"
+                />
+              )}
+              <h3>{product.name}</h3>
+              <p>{product.description}</p>
+              <p>${product.price}</p>
+            </Link>
+          </div>
         ))}
       </div>
     </div>

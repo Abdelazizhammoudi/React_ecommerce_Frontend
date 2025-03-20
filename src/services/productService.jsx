@@ -10,13 +10,17 @@ export const ProductService = {
 
   // Update a product
   update: async (id, data) => {
+    const formData = new FormData();
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
+
     const response = await fetch(`${BASE_URL}/product/${id}/update/`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json",
         "X-CSRFToken": getCookie("csrftoken"),
       },
-      body: JSON.stringify(data),
+      body: formData,
     });
     if (!response.ok) throw new Error("Failed to update product");
     return response.json();

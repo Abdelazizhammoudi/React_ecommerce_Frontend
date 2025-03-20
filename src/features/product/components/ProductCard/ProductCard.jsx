@@ -6,10 +6,7 @@ import "./product-card.css";
 function ProductCard({ product }) {
   return (
     <div className="product-card">
-      <Link to={`/product/${product.id}`} className="product-link">
-        <h3>{product.name}</h3>
-        <p>{product.description}</p>
-        <p><strong>Price:</strong> ${product.price}</p>
+      <Link to={`/product/${product.id}`} className="product-link">     
         <div className="product-images">
           {product.images?.map((image) => (
             <img
@@ -19,6 +16,11 @@ function ProductCard({ product }) {
               className="product-image"
             />
           ))}
+        </div>
+        <div className="product-texts-container">
+            <h3>{product.name}</h3>
+            <p>{product.description}</p>
+            <p><strong>Price:</strong> ${product.price}</p>
         </div>
       </Link>
     </div>
