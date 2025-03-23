@@ -58,16 +58,24 @@ function ProductDetail() {
       <div className="product-info">
         <h2>{product.name}</h2>
         <p>{product.description}</p>
-        <p className="price">{product.price} DZD </p>
+        <p className="price">{product.price} DZD</p>
       </div>
 
-      {/* Update Button */}
-      <button
-        className="primary-button"
-        onClick={() => navigate(`/product/${id}/update`)}
-      >
-        Update Product
-      </button>
+      {/* Action Buttons */}
+      <div className="product-actions">
+        <button
+          className="buy-now-button"
+          onClick={() => navigate(`/order/${id}`)} // Ensure this matches your route
+        >
+          Buy Now
+        </button>
+        <button
+          className="primary-button"
+          onClick={() => navigate(`/product/${id}/update`)}
+        >
+          Update Product
+        </button>
+      </div>
     </div>
   );
 }
