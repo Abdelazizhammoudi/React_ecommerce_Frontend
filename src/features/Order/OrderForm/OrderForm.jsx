@@ -5,7 +5,7 @@ import {
   BASE_URL, 
   API_ENDPOINTS, 
   ERROR_MESSAGES, 
-  SUCCESS_MESSAGES,
+  SUCCESS_MESSAGES, 
   ORDER_STATUS
 } from '@/config/constants';
 import './OrderForm.css';
@@ -14,11 +14,11 @@ const OrderForm = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    firstName: '', // Updated field name
-    lastName: '', // Updated field name
+    firstName: '',
+    lastName: '',
     phone: '',
     address: '',
-    deliveryType: 'home' // Updated field name
+    deliveryType: 'home'
   });
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -123,7 +123,7 @@ const OrderForm = () => {
           <label>First Name:</label>
           <input
             type="text"
-            name="firstName" // Updated field name
+            name="firstName"
             value={formData.firstName}
             onChange={handleChange}
             required
@@ -135,7 +135,7 @@ const OrderForm = () => {
           <label>Last Name:</label>
           <input
             type="text"
-            name="lastName" // Updated field name
+            name="lastName"
             value={formData.lastName}
             onChange={handleChange}
             required
@@ -172,7 +172,7 @@ const OrderForm = () => {
             <label>
               <input
                 type="radio"
-                name="deliveryType" // Updated field name
+                name="deliveryType"
                 value="home"
                 checked={formData.deliveryType === 'home'}
                 onChange={handleChange}
@@ -182,7 +182,7 @@ const OrderForm = () => {
             <label>
               <input
                 type="radio"
-                name="deliveryType" // Updated field name
+                name="deliveryType"
                 value="center"
                 checked={formData.deliveryType === 'center'}
                 onChange={handleChange}

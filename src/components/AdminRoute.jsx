@@ -1,14 +1,44 @@
-// components/AdminRoute.jsx
-import { Navigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Navigate, useLocation, Outlet } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 
-const AdminRoute = ({ children }) => {
-    const { admin } = useAuth();
-    const adminToken = localStorage.getItem('adminToken');
+const AdminRoute = () => {
+  const { admin, loading } = useAuth();
+  const location = useLocation();
+  const [isVerified, setIsVerified] = useState(false);
+  const token = localStorage.getItem('adminToken');
 
-    if (!admin?.isAdmin || !adminToken) {
-        return <Navigate to="/admin/login" replace />;
+  useEffect(() => {
+    if (!loading && token && admin?.isAdmin) {
+      setIsVerified(true);
     }
+  }, [loading, admin, token]);
 
-    return children;
+  console.log('Final verification state:', {
+    verified: isVerified,
+    loading,
+    token: !!token,
+    isAdmin: admin?.isAdmin
+  });
+
+  if (loading) {
+    return <div className="admin-loading">Verifying permissions...</div>;
+  }
+
+  if (!isVerified) {
+    return (
+      <Navigate
+        to="/unauthorized"
+        state={{
+          from: location,
+          reason: !token ? 'Missing authentication token' : 'Admin privileges required'
+        }}
+        replace
+      />
+    );
+  }
+
+  return <Outlet />;
 };
+
+export default AdminRoute;

@@ -1,6 +1,21 @@
 // config/constants.js
 export const BASE_URL = "http://127.0.0.1:8000";
 
+// Order Status Constants
+export const ORDER_STATUS = {
+  PENDING: 'pending',
+  DELIVERED: 'delivered',
+};
+
+// Success Messages
+export const SUCCESS_MESSAGES = {
+  ORDER_CREATE_SUCCESS: 'Order created successfully!',
+  ORDER_UPDATE_SUCCESS: 'Order status updated successfully!',
+  PRODUCT_CREATE_SUCCESS: 'Product created successfully!',
+  PRODUCT_UPDATE_SUCCESS: 'Product updated successfully!',
+  PRODUCT_DELETE_SUCCESS: 'Product deleted successfully!',
+};
+
 // API Endpoints
 export const API_ENDPOINTS = {
   // Product Endpoints
@@ -16,9 +31,10 @@ export const API_ENDPOINTS = {
   // Order Endpoints
   ORDER_CREATE: '/order/orders/create/',
   ORDERS_LIST: "/order/list/",
+  ADMIN_LOGIN: "/admin/login/",
+  ORDER_STATUS: (productId) => `/orders/status/${productId}/`, 
   ORDER_DETAIL: (id) => `/order/orders/${id}/`,
   ORDER_UPDATE: (id) => `/order/orders/${id}/`,
-
 };
 
 // Error Messages
@@ -28,24 +44,4 @@ export const ERROR_MESSAGES = {
   DELETE_ERROR: "Failed to delete item. Please try again.",
   ORDER_FETCH_ERROR: "Failed to load orders. Please check your permissions.",
   ORDER_UPDATE_ERROR: "Failed to update order status. Please try again.",
-};
-
-// Success Messages
-export const SUCCESS_MESSAGES = {
-  UPLOAD_SUCCESS: "Content uploaded successfully!",
-  DELETE_SUCCESS: "Item deleted successfully!",
-  ORDER_CREATE_SUCCESS: "Order placed successfully! Thank you!",
-  ORDER_UPDATE_SUCCESS: "Order status updated successfully!",
-};
-
-// User Roles
-export const USER_ROLES = {
-  ADMIN: "admin",
-  CUSTOMER: "customer",
-};
-
-// Order Statuses
-export const ORDER_STATUS = {
-  PENDING: "pending",
-  DELIVERED: "delivered",
 };

@@ -4,22 +4,19 @@ import axios from 'axios';
 import { 
   BASE_URL, 
   API_ENDPOINTS, 
-  ERROR_MESSAGES, 
-  SUCCESS_MESSAGES,
-  ORDER_STATUS
+  ORDER_STATUS, 
+  ERROR_MESSAGES,
 } from '@/config/constants';
-import { useAuth } from '@/context/AuthContext';
 import './OrderList.css';
 
-const OrdersList = () => {
+const OrdersList = ({ isAdmin }) => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const navigate = useNavigate();
-  const { admin } = useAuth();
 
   useEffect(() => {
-    if (!admin?.isAdmin) {
+    if (!isAdmin) {
       navigate('/unauthorized');
       return;
     }
@@ -30,11 +27,11 @@ const OrdersList = () => {
           `${BASE_URL}${API_ENDPOINTS.ORDERS_LIST}`,
           {
             headers: {
-              Authorization: `Token ${localStorage.getItem('adminToken')}`
+              Authorization: `Bearer ${localStorage.getItem('accessToken')}`
             }
           }
         );
-        setOrders(response.data.data);
+        setOrders(response.data);
       } catch (err) {
         setError(err.response?.data?.message || ERROR_MESSAGES.ORDER_FETCH_ERROR);
       } finally {
@@ -43,7 +40,7 @@ const OrdersList = () => {
     };
 
     fetchOrders();
-  }, [admin, navigate]);
+  }, [isAdmin, navigate]);
 
   const handleStatusUpdate = async (orderId) => {
     try {
@@ -52,7 +49,7 @@ const OrdersList = () => {
         { status: ORDER_STATUS.DELIVERED },
         {
           headers: {
-            Authorization: `Token ${localStorage.getItem('adminToken')}`
+            Authorization: `Bearer ${localStorage.getItem('accessToken')}`
           }
         }
       );
@@ -65,7 +62,7 @@ const OrdersList = () => {
           } : order
         )
       );
-      alert(SUCCESS_MESSAGES.ORDER_UPDATE_SUCCESS);
+      alert('Order status updated successfully!');
     } catch (err) {
       setError(err.response?.data?.message || ERROR_MESSAGES.ORDER_UPDATE_ERROR);
     }
