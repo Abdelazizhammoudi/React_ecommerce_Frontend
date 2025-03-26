@@ -40,7 +40,7 @@ function App() {
               {/* Protected Group */}
               <Route element={<AdminRoute />}>
                 <Route path="/admin/dashboard" element={<Dashboard />} />
-                <Route path="/admin/orders" element={<OrderList />} />
+                <Route path="/admin/orders" element={<OrderList/>} />
               </Route>
   
               {/* Error Routes */}
