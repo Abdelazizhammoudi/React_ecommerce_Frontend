@@ -15,6 +15,7 @@ import AdminLogin from "@/components/AdminLogin";
 import AdminRoute from "@/components/AdminRoute";
 import Unauthorized from "@/components/Unauthorized";
 import { AuthProvider } from '@/context/AuthContext';
+import Dashboard from "@/features/admin/Dashboard/Dashboard";
 // import './App.css'; // For loading spinner styles
 
 function App() {
@@ -38,7 +39,7 @@ function App() {
               
               {/* Protected Group */}
               <Route element={<AdminRoute />}>
-                <Route path="/admin/dashboard" element={<OrderList />} />
+                <Route path="/admin/dashboard" element={<Dashboard />} />
                 <Route path="/admin/orders" element={<OrderList />} />
               </Route>
   
