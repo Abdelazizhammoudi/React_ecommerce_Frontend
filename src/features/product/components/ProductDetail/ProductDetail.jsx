@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import useFetch from "@/hooks/useFetch";
+import { useAuth } from "@/context/AuthContext"; // Import useAuth hook
 import "@/styles/global.css";
 import "./product-detail.css";
 
@@ -9,6 +10,7 @@ function ProductDetail() {
   const navigate = useNavigate();
   const { data: product, loading, error } = useFetch(`/product/${id}/`);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const { admin } = useAuth(); // Get admin status from AuthContext
 
   if (loading) return <div className="loading">Loading product details...</div>;
   if (error) return <div className="error">{error}</div>;
@@ -69,12 +71,14 @@ function ProductDetail() {
         >
           Buy Now
         </button>
-        <button
-          className="primary-button"
-          onClick={() => navigate(`/product/${id}/update`)}
-        >
-          Update Product
-        </button>
+        {admin?.isAdmin && ( // Only show this button if the user is an admin
+          <button
+            className="primary-button"
+            onClick={() => navigate(`/product/${id}/update`)}
+          >
+            Update Product
+          </button>
+        )}
       </div>
     </div>
   );

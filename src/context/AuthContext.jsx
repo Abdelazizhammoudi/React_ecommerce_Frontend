@@ -5,7 +5,12 @@ import { BASE_URL } from '@/config/constants';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [admin, setAdmin] = useState(null);
+  
+  //The admin state is initialized from localStorage when the app loads: 
+    const [admin, setAdmin] = useState(() => {
+    const token = localStorage.getItem('adminToken');
+    return token ? { isAdmin: true, verified: true } : null; // Rehydrate admin state if token exists
+  });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 

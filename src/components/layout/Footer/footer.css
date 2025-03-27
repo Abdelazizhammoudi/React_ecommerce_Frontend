@@ -4,4 +4,19 @@
     background: var(--primary-color);
     color: white;
     margin-top: auto; /* Pushes footer to the bottom */
+       /* font-size: 0.9rem;*/
   }
+  .footer p {
+    margin: var(--space-xs) 0;
+  }
+  
+  .admin-login-link {
+    color: rgb(0, 105, 105);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  /* .admin-login-link:hover {
+    color: var(--primary-hover);
+  } */

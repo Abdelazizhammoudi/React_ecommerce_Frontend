@@ -109,7 +109,7 @@
 }
 
 .buy-now-button {
-  background: #2ecc71;
+  background: var(--primary-color);
   color: white;
   border: none;
   padding: 12px 24px;

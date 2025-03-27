@@ -11,9 +11,9 @@ import OrderForm from "@/features/Order/OrderForm/OrderForm";
 import OrderStatus from '@/features/Order/OrderStatus/OrderStatus';
 import NotFound from "@/components/NotFound/NotFound";
 import ErrorBoundary from "@/components/ErrorBoundary";
-import AdminLogin from "@/components/AdminLogin";
+import AdminLogin from "@/components/AdminLogin/AdminLogin";
 import AdminRoute from "@/components/AdminRoute";
-import Unauthorized from "@/components/Unauthorized";
+import Unauthorized from "@/components/Unauthorized/Unauthorized";
 import { AuthProvider } from '@/context/AuthContext';
 import Dashboard from "@/features/admin/Dashboard/Dashboard";
 // import './App.css'; // For loading spinner styles
@@ -28,19 +28,19 @@ function App() {
             <Routes>
               {/* Public Routes */}
               <Route path="/" element={<Home />} />
+              <Route path="/order/:productId" element={<OrderForm />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/product/:id/update" element={<ProductUpdate />} />
-              <Route path="/addProduct" element={<ProductForm />} />
-              <Route path="/order/:productId" element={<OrderForm />} />
-              <Route path="/order-status" element={<OrderStatus />} />
-  
+
               {/* Admin Routes */}
               <Route path="/admin/login" element={<AdminLogin />} />
               
               {/* Protected Group */}
               <Route element={<AdminRoute />}>
+                <Route path="/addProduct" element={<ProductForm />} />
                 <Route path="/admin/dashboard" element={<Dashboard />} />
                 <Route path="/admin/orders" element={<OrderList/>} />
+                <Route path="/order-status" element={<OrderStatus />} />
               </Route>
   
               {/* Error Routes */}

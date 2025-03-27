@@ -1,28 +1,44 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "@/context/AuthContext"; // Import useAuth hook
 import "@/styles/global.css";
 import "./header.css";
 import logo from "@/assets/logo.jpg"; // Import logo image
 
 function Header() {
+  const { admin, logout } = useAuth(); // Get admin status and logout function
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    logout(); // Call the logout function to clear the token and reset admin state
+    setTimeout(() => {
+      navigate("/"); // Redirect to the home page after logout
+    }, 0); // Use a timeout to ensure redirection happens after state updates
+  };
+
   return (
     <nav className="header">
       <div className="logo">
-        <img src={logo} 
-        alt="logo"
-        className="logo-image"
-         />
+        <img
+          src={logo}
+          alt="logo"
+          className="logo-image"
+        />
       </div>
       <ul className="nav-links">
         <li>
           <Link to="/" className="nav-link">Home</Link>
         </li>
-        {/* <li>
-          <Link to="/products" className="nav-link">Products</Link>
-        </li> */}
         <li>
           <Link to="/addProduct" className="nav-link">Add Product</Link>
         </li>
+        {admin && ( // Show the Logout button only if the user is logged in
+          <li>
+            <button className="logout-button" onClick={handleLogout}>
+              Logout
+            </button>
+          </li>
+        )}
       </ul>
     </nav>
   );

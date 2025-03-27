@@ -32,7 +32,6 @@ const AdminRoute = () => {
     );
   } else {
     return  <Outlet/>;
-      // <Navigate to="/admin/dashboard" replace />
        
   }
 
