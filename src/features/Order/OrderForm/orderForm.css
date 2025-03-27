@@ -1,6 +1,6 @@
 /* Order Form */
 .order-form-container {
-    max-width: 600px;
+    max-width: 400px;
     margin: 2rem auto;
     padding: 2rem;
     background: white;
@@ -20,7 +20,7 @@
   
   .form-group input,
   .form-group textarea {
-    width: 100%;
+    width: 95%;;
     padding: 0.75rem;
     border: 1px solid #ddd;
     border-radius: 4px;

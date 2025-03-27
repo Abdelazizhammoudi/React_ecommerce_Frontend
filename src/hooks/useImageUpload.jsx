@@ -20,12 +20,15 @@ const useImageUpload = () => {
         formData.append("image", image);
       });
 
+      const token = localStorage.getItem("adminToken"); // Retrieve the token from localStorage
+
       const response = await fetch(`${BASE_URL}/product/image/upload/${productId}/`, {
         method: "POST",
         headers: {
+          "Authorization": `Token ${token}`, // Add the Authorization header
           "X-CSRFToken": getCookie("csrftoken"),
         },
-        body: formData
+        body: formData,
       });
 
       if (!response.ok) {
@@ -52,7 +55,7 @@ const useImageUpload = () => {
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
+  if (parts.length === 2) return parts.pop().split(";").shift();
 }
 
 export default useImageUpload;

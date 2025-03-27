@@ -1,5 +1,6 @@
 .product-form-container {
-    max-width: 600px;
+    max-width: 400px;
+    width: 350px;
     margin: var(--space-lg) auto;
     padding: var(--space-md);
     background: white;

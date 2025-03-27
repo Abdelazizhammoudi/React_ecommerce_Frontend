@@ -156,9 +156,11 @@
   background: var(--primary-color);
   color: white;
 }
-.delete-product-button {
-
-  align-items: center;
+.product-update-container .delete-product-button {
+  display: flex;
+  align-items: center; /*Center vertically */
+  /* justify-content: center; Center horizontally */
+  margin: 0 auto; /* Center horizontally within the parent container */
 }
 
 /* Error Message */

@@ -1,12 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import "@/styles/global.css";
 import "./product-card.css";
 
 function ProductCard({ product }) {
   return (
     <div className="product-card">
-      <Link to={`/product/${product.id}`} className="product-link">     
+      <Navigate to={`/product/${product.id}`} className="product-link">     
         <div className="product-images">
           {product.images?.map((image) => (
             <img
@@ -22,7 +22,7 @@ function ProductCard({ product }) {
             <p>{product.description}</p>
             <p><strong>Price:</strong> ${product.price}</p>
         </div>
-      </Link>
+      </Navigate>
     </div>
   );
 }

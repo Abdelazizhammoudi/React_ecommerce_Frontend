@@ -73,7 +73,7 @@ function ProductDetail() {
         </button>
         {admin?.isAdmin && ( // Only show this button if the user is an admin
           <button
-            className="primary-button"
+            className="update-button"
             onClick={() => navigate(`/product/${id}/update`)}
           >
             Update Product
