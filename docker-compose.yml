@@ -1,4 +1,4 @@
-# version: '3.8'
+# # version: '3.8'
 
 services:
   frontend:
@@ -12,3 +12,15 @@ services:
       - .:/app
       - /app/node_modules
     command: npm run dev
+
+# version: '3.8'
+
+# services:
+#   frontend:
+#     container_name: react_production
+#     build: .
+#     ports:
+#       - "80:80"  # Using standard HTTP port
+#     restart: unless-stopped
+#     environment:
+#       - NODE_ENV=production

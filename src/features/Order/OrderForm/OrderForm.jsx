@@ -9,6 +9,8 @@ import {
   ORDER_STATUS
 } from '@/config/constants';
 import './OrderForm.css';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 const OrderForm = () => {
   const { productId } = useParams();
@@ -18,19 +20,35 @@ const OrderForm = () => {
     lastName: '',
     phone: '',
     address: '',
-    deliveryType: 'home'
+    deliveryType: 'home',
+    quantity: 1,
   });
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [product, setProduct] = useState(null);
+  const [available_stock, setAvailableStock] = useState(0);
+
+  // Format numbers with thousand separators
+  const formatNumber = (num) => {
+    return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
+  };
+
+  // Format price with comma as decimal separator
+  const formatPrice = (price) => {
+    return parseFloat(price).toFixed(2).replace('.', ',');
+  };
 
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await axios.get(
-          `${BASE_URL}/product/${productId}/`
-        );
-        setProduct(response.data);
+        const response = await axios.get(`${BASE_URL}/product/${productId}/`);
+        const productData = {
+          ...response.data,
+          price: parseFloat(response.data.price),
+          available_stock: parseInt(response.data.available_stock, 10)
+        };
+        setProduct(productData);
+        setAvailableStock(productData.available_stock || 0);
       } catch (err) {
         console.error('Product fetch error:', err);
         setError('Failed to fetch product details');
@@ -43,10 +61,22 @@ const OrderForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setError('');
     
-    // Client-side validation
+    if (available_stock < 1) {
+      setError('This product is currently out of stock');
+      setIsSubmitting(false);
+      return;
+    }
+
     if (!formData.firstName || !formData.lastName || !formData.phone || !formData.address) {
       setError('All fields are required');
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (formData.quantity < 1 || formData.quantity > available_stock) {
+      setError(`Please enter a quantity between 1 and ${formatNumber(available_stock)}`);
       setIsSubmitting(false);
       return;
     }
@@ -57,7 +87,8 @@ const OrderForm = () => {
         {
           ...formData,
           product: productId,
-          status: ORDER_STATUS.PENDING
+          status: ORDER_STATUS.PENDING,
+          total_price: product.price * formData.quantity
         },
         {
           headers: {
@@ -71,39 +102,39 @@ const OrderForm = () => {
           state: {
             status: 'success',
             message: SUCCESS_MESSAGES.ORDER_CREATE_SUCCESS,
-            orderId: response.data.id
+            orderId: response.data.id,
+            quantity: formData.quantity,
+            totalPrice: product.price * formData.quantity
           }
         });
       }
     } catch (err) {
       console.error('Order submission error:', err);
-      console.error('Error details:', {
-        status: err.response?.status,
-        data: err.response?.data,
-        headers: err.response?.headers
-      });
-
       const errorMessage = err.response?.data?.detail || 
                          err.response?.data?.message || 
                          ERROR_MESSAGES.ORDER_CREATE_ERROR;
-
-      navigate('/order-status', {
-        state: {
-          status: 'error',
-          message: errorMessage,
-          errorDetails: err.response?.data
-        }
-      });
+      setError(errorMessage);
     } finally {
       setIsSubmitting(false);
     }
   };
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
+    const { name, value } = e.target;
+    let newValue = value;
+
+    if (name === 'quantity') {
+      const numericValue = value.replace(/\D/g, '');
+      newValue = numericValue === '' ? 1 : Math.min(
+        Math.max(1, parseInt(numericValue, 10)),
+        available_stock
+      );
+    }
+
+    setFormData(prev => ({
+      ...prev,
+      [name]: newValue
+    }));
   };
 
   if (!product) return <div className="loading">Loading product details...</div>;
@@ -114,60 +145,81 @@ const OrderForm = () => {
       <div className="product-info">
         <h3>{product.name}</h3>
         <p>{product.description}</p>
-        <p className="price">{product.price} DZD</p>
+        <p className="price">{formatPrice(product.price)} DZD (per unit)</p>
+        <p className={`stock ${available_stock === 0 ? 'out-of-stock' : ''}`}>
+          Available: {formatNumber(available_stock)} units
+        </p>
       </div>
 
       <form onSubmit={handleSubmit}>
-        {/* First Name Field */}
-        <div className="form-group">
-          <label>First Name:</label>
-          <input
-            type="text"
+        <div className="form-row">
+          <TextField
+            label="First Name"
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
+            fullWidth
             required
+            margin="normal"
           />
-        </div>
-
-        {/* Last Name Field */}
-        <div className="form-group">
-          <label>Last Name:</label>
-          <input
-            type="text"
+          <TextField
+            label="Last Name"
             name="lastName"
             value={formData.lastName}
             onChange={handleChange}
+            fullWidth
             required
+            margin="normal"
           />
         </div>
 
-        {/* Phone Number Field */}
-        <div className="form-group">
-          <label>Phone Number:</label>
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <TextField
+          label="Phone Number"
+          name="phone"
+          type="tel"
+          value={formData.phone}
+          onChange={handleChange}
+          fullWidth
+          required
+          margin="normal"
+        />
 
-        {/* Address Field */}
-        <div className="form-group">
-          <label>Address:</label>
-          <textarea
-            name="address"
-            value={formData.address}
-            onChange={handleChange}
-            required
-          />
-        </div>
+        <TextField
+          label="Address"
+          name="address"
+          value={formData.address}
+          onChange={handleChange}
+          fullWidth
+          required
+          margin="normal"
+          multiline
+          rows={3}
+        />
 
-        {/* Delivery Type Radio Buttons */}
-        <div className="form-group">
-          <label>Delivery Type:</label>
+        <TextField
+          label="Quantity"
+          name="quantity"
+          type="text"
+          value={formData.quantity}
+          onChange={handleChange}
+          fullWidth
+          required
+          margin="normal"
+          disabled={available_stock === 0}
+          inputProps={{ 
+            pattern: '[0-9]*',
+            inputMode: 'numeric'
+          }}
+          error={formData.quantity > available_stock}
+          helperText={
+            formData.quantity > available_stock 
+              ? `Maximum ${formatNumber(available_stock)} items available`
+              : ''
+          }
+        />
+
+        <div className="delivery-section">
+          <h4>Delivery Type</h4>
           <div className="delivery-options">
             <label>
               <input
@@ -192,22 +244,30 @@ const OrderForm = () => {
           </div>
         </div>
 
-        {/* Error Message Display */}
-        {error && <div className="form-error">{error}</div>}
+        {available_stock > 0 && (
+          <div className="order-summary">
+            <h4>Order Summary</h4>
+            <p>Unit Price: {formatPrice(product.price)} DZD</p>
+            <p>Quantity: {formatNumber(formData.quantity)}</p>
+            <p className="total-price">
+              Total: {formatPrice(product.price * formData.quantity)} DZD
+            </p>
+          </div>
+        )}
 
-        {/* Submit Button */}
-        <button 
+        {error && <div className="error-message">{error}</div>}
+
+        <Button 
           type="submit" 
-          className="submit-button"
-          disabled={isSubmitting}
+          variant="contained" 
+          color="primary"
+          fullWidth
+          disabled={isSubmitting || available_stock === 0}
+          sx={{ mt: 3, mb: 2 }}
         >
-          {isSubmitting ? (
-            <>
-              <span className="spinner"></span>
-              Processing...
-            </>
-          ) : 'Place Order'}
-        </button>
+          {available_stock === 0 ? 'Out of Stock' : 
+           isSubmitting ? 'Processing...' : 'Place Order'}
+        </Button>
       </form>
     </div>
   );

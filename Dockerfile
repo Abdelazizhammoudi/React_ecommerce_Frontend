@@ -1,4 +1,4 @@
-# Use an official node image as the base image
+# # Use an official node image as the base image
 FROM node:18-alpine
 
 # Set the working directory
@@ -24,3 +24,17 @@ EXPOSE 5173
 
 # Start the Vite development server
 CMD ["npm", "run", "dev"]
+
+
+# FROM node:18-alpine as builder
+# WORKDIR /app
+# COPY package*.json ./
+# RUN npm install --legacy-peer-deps
+# COPY . .
+# RUN npm run dev
+
+# # Production stage
+# FROM nginx:alpine
+# COPY --from=builder /app/dist /usr/share/nginx/html
+# EXPOSE 80
+# CMD ["nginx", "-g", "daemon off;"]

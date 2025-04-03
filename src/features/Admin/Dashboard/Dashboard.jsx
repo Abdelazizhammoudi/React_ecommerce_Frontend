@@ -1,39 +1,75 @@
 import React, { useState } from 'react';
+import { Grid, Card, CardContent, Typography, Button, Box } from '@mui/material';
 import OrderList from '@/features/Order/OrderList/OrderList';
+import ProductsList from '@/features/product/components/ProductList/ProductList';
 
 const Dashboard = () => {
-    const [viewOrders, setViewOrders] = useState(false);
-
-    if (viewOrders) {
-        // Navigate to the OrderList component inside the dashboard
-        return <OrderList />;
-    }
+    const [activeView, setActiveView] = useState('overview');
 
     return (
-        <div className="dashboard">
-            <h1>Dashboard</h1>
-            <div className="dashboard-sections">
-                <div className="dashboard-card">
-                    <h2>Overview</h2>
-                    <p>Summary of your store's performance.</p>
-                </div>
-                <div className="dashboard-card">
-                    <h2>Orders</h2>
-                    <p>Track and manage customer orders.</p>
-                    {/* Use a button to trigger navigation */}
-                    <button
-                        onClick={() => setViewOrders(true)}
-                        className="dashboard-link"
+        <Box sx={{ p: 3 }}>
+            <Typography variant="h3" gutterBottom>Admin Dashboard</Typography>
+            
+            {activeView === 'overview' && (
+                <Grid container spacing={3} sx={{ mb: 4 }}>
+                    <Grid item xs={12} md={6} lg={4}>
+                        <Card elevation={3}>
+                            <CardContent>
+                                <Typography variant="h5" gutterBottom>Orders</Typography>
+                                <Button 
+                                    variant="contained" 
+                                    onClick={() => setActiveView('orders')}
+                                    fullWidth
+                                >
+                                    Manage Orders
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                    
+                    <Grid item xs={12} md={6} lg={4}>
+                        <Card elevation={3}>
+                            <CardContent>
+                                <Typography variant="h5" gutterBottom>Products</Typography>
+                                <Button 
+                                    variant="contained" 
+                                    onClick={() => setActiveView('products')}
+                                    fullWidth
+                                >
+                                    Manage Products
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+                </Grid>
+            )}
+
+            {activeView === 'orders' && (
+                <>
+                    <Button 
+                        variant="outlined" 
+                        onClick={() => setActiveView('overview')}
+                        sx={{ mb: 2 }}
                     >
-                        View Orders
-                    </button>
-                </div>
-                <div className="dashboard-card">
-                    <h2>Products</h2>
-                    <p>Manage your product inventory.</p>
-                </div>
-            </div>
-        </div>
+                        Back to Dashboard
+                    </Button>
+                    <OrderList />
+                </>
+            )}
+
+            {activeView === 'products' && (
+                <>
+                    <Button 
+                        variant="outlined" 
+                        onClick={() => setActiveView('overview')}
+                        sx={{ mb: 2 }}
+                    >
+                        Back to Dashboard
+                    </Button>
+                    <ProductsList />
+                </>
+            )}
+        </Box>
     );
 };
 

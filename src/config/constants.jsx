@@ -29,9 +29,9 @@ export const API_ENDPOINTS = {
   IMAGE_DELETE: (imageId) => `/product/image/delete/${imageId}/`,
   
   // Order Endpoints
-  ORDER_CREATE: "/order/orders/create/",
-  ORDERS_LIST: "/order/orders/list/",
-  ADMIN_LOGIN: "/admin/login/",
+  ORDER_CREATE: `/order/orders/create/`,
+  ORDERS_LIST: `/order/orders/list/`,
+  ADMIN_LOGIN: `/admin/login/`,
   ORDER_STATUS: (Id) => `/order/orders/status/${Id}/`, 
   ORDER_DETAIL: (id) => `/order/orders/${id}/`,
   ORDER_UPDATE: (id) => `/order/orders/update/${id}/`,

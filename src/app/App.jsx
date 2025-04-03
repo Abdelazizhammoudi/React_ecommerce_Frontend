@@ -31,6 +31,7 @@ function App() {
               <Route path="/order/:productId" element={<OrderForm />} />
               <Route path="/product/:id" element={<ProductDetail />} />
               <Route path="/product/:id/update" element={<ProductUpdate />} />
+              <Route path="/order-status" element={<OrderStatus />} />
 
               {/* Admin Routes */}
               <Route path="/admin/login" element={<AdminLogin />} />
@@ -40,7 +41,6 @@ function App() {
                 <Route path="/addProduct" element={<ProductForm />} />
                 <Route path="/admin/dashboard" element={<Dashboard />} />
                 <Route path="/admin/orders" element={<OrderList/>} />
-                <Route path="/order-status" element={<OrderStatus />} />
               </Route>
   
               {/* Error Routes */}

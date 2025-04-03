@@ -1,130 +1,310 @@
 import React, { useEffect, useState } from 'react';
+import { 
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
+  Paper, CircularProgress, Alert, Button, Box, Typography
+} from '@mui/material';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { useAuth } from '@/context/AuthContext'; // Assuming this hook exists
 import { 
   BASE_URL, 
   API_ENDPOINTS, 
   ORDER_STATUS, 
-  ERROR_MESSAGES,
+  ERROR_MESSAGES, 
+  SUCCESS_MESSAGES 
 } from '@/config/constants';
-import './OrderList.css';
 
 const OrdersList = () => {
-  const [orders, setOrders] = useState([]); // Ensure orders is initialized as an array
+  const navigate = useNavigate();
+  const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const navigate = useNavigate();
-  const { admin } = useAuth(); // Get admin status from the AuthContext
+  const [success, setSuccess] = useState('');
 
-  useEffect(() => {
-    // Redirect to unauthorized if the user is not an admin
-    if (!admin?.isAdmin) {
-      navigate('/unauthorized');
-      return;
+  // Enhanced authentication check with debugging
+  const checkAuth = () => {
+    const token = localStorage.getItem('token');
+    console.debug('[Auth] Current token:', token ? 'Exists' : 'Missing');
+    if (!token) {
+      console.warn('[Auth] No token, redirecting to login');
+      navigate('/admin/login');
+      return false;
     }
+    return true;
+  };
 
-    const fetchOrders = async () => {
-      try {
-        console.log('Fetching orders from:', `${BASE_URL}${API_ENDPOINTS.ORDERS_LIST}`);
-        console.log('Authorization Header:', `Token ${localStorage.getItem('adminToken')}`);
-
-        const response = await axios.get(
-          `${BASE_URL}${API_ENDPOINTS.ORDERS_LIST}`,
-          {
-            headers: {
-              Authorization: `Token ${localStorage.getItem('adminToken')}`
-            }
-          }
-        );
-
-        console.log('API Response:', response.data);
-
-        // Extract the orders from the response
-        if (response.data?.data && Array.isArray(response.data.data)) {
-          setOrders(response.data.data);
-        } else {
-          throw new Error('Unexpected API response format');
-        }
-      } catch (err) {
-        console.error('Error fetching orders:', err.response || err.message);
-        setError(err.response?.data?.message || ERROR_MESSAGES.ORDER_FETCH_ERROR);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchOrders();
-  }, [admin, navigate]);
-
-  const handleStatusUpdate = async (orderId) => {
+  // Robust data fetching with multiple fallbacks
+  const fetchOrders = async () => {
+    console.group('[Fetch] Starting orders fetch');
     try {
-      await axios.patch(
-        `${BASE_URL}${API_ENDPOINTS.ORDER_UPDATE(orderId)}`,
-        { status: ORDER_STATUS.DELIVERED },
-        {
-          headers: {
-            Authorization: `Token ${localStorage.getItem('adminToken')}`
-          }
-        }
-      );
+      setLoading(true);
+      setError('');
+      
+      if (!checkAuth()) {
+        console.warn('[Auth] Authentication failed');
+        return;
+      }
 
-      setOrders(prevOrders => 
-        prevOrders.map(order => 
-          order.id === orderId ? { 
-            ...order, 
-            status: ORDER_STATUS.DELIVERED 
-          } : order
-        )
-      );
-      alert('Order status updated successfully!');
+      const endpoint = `${BASE_URL}${API_ENDPOINTS.ORDERS_LIST}`;
+      console.debug('[Fetch] Requesting:', endpoint);
+
+      const response = await fetch(endpoint, {
+        headers: {
+          'Authorization': `Token ${localStorage.getItem('token')}`,
+          'Content-Type': 'application/json'
+        }
+      });
+
+      console.debug('[Fetch] Response status:', response.status);
+      
+      if (response.status === 401) {
+        console.warn('[Auth] Token expired, clearing and redirecting');
+        localStorage.removeItem('token');
+        navigate('/admin/login');
+        return;
+      }
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('[Fetch] Server error:', errorText);
+        throw new Error(errorText || ERROR_MESSAGES.ORDER_FETCH_ERROR);
+      }
+      
+      const result = await response.json();
+      console.debug('[Fetch] Raw response:', result);
+
+      // Multiple format handling with validation
+      let ordersData = [];
+      if (Array.isArray(result)) {
+        ordersData = result;
+      } else if (result && typeof result === 'object') {
+        ordersData = result.data || result.orders || result.results || [];
+      }
+
+      if (!Array.isArray(ordersData)) {
+        console.warn('[Fetch] Unexpected data format, converting to array');
+        ordersData = [result];
+      }
+
+      console.debug('[Fetch] Processed orders:', ordersData);
+      setOrders(ordersData);
     } catch (err) {
-      console.error('Error updating order status:', err.response || err.message);
-      setError(err.response?.data?.message || ERROR_MESSAGES.ORDER_UPDATE_ERROR);
+      console.error('[Fetch] Error:', err);
+      setError(err.message || ERROR_MESSAGES.ORDER_FETCH_ERROR);
+    } finally {
+      console.log('[Fetch] Completed, setting loading false');
+      setLoading(false);
+      console.groupEnd();
     }
   };
 
-  if (loading) return <div className="orders-loading">Loading orders...</div>;
-  if (error) return <div className="orders-error">Error: {error}</div>;
+  // Status update with error recovery
+  const handleStatusUpdate = async (orderId) => {
+    console.group('[Update] Starting status update');
+    try {
+      setError('');
+      setSuccess('');
+      
+      if (!checkAuth()) return;
 
+      console.debug('[Update] Updating order:', orderId);
+      const response = await fetch(
+        `${BASE_URL}${API_ENDPOINTS.ORDER_STATUS(orderId)}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Token ${localStorage.getItem('token')}`
+          },
+          body: JSON.stringify({ status: ORDER_STATUS.DELIVERED })
+        }
+      );
+
+      if (response.status === 401) {
+        localStorage.removeItem('token');
+        navigate('/admin/login');
+        return;
+      }
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('[Update] Server error:', errorText);
+        throw new Error(errorText || ERROR_MESSAGES.ORDER_UPDATE_ERROR);
+      }
+      
+      // Optimistic UI update
+      setOrders(prevOrders => 
+        prevOrders.map(order => 
+          order.id === orderId ? { ...order, status: ORDER_STATUS.DELIVERED } : order
+        )
+      );
+      setSuccess(SUCCESS_MESSAGES.ORDER_UPDATE_SUCCESS);
+      console.debug('[Update] Successfully updated order');
+    } catch (err) {
+      console.error('[Update] Error:', err);
+      setError(err.message || ERROR_MESSAGES.ORDER_UPDATE_ERROR);
+      // Re-fetch to ensure sync with server
+      fetchOrders();
+    } finally {
+      console.groupEnd();
+    }
+  };
+
+  // Fetch data on mount with timeout safety
+  useEffect(() => {
+    let timeoutId;
+    
+    const fetchData = async () => {
+      await fetchOrders();
+      // Clear timeout if fetch completes
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+
+    // Set timeout for 15 seconds
+    timeoutId = setTimeout(() => {
+      if (loading) {
+        console.warn('[Timeout] Request taking too long');
+        setError('Request timeout. Please check your connection.');
+        setLoading(false);
+      }
+    }, 15000);
+
+    fetchData();
+
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    };
+  }, [navigate]);
+
+  // Loading state with timeout warning
+  if (loading) {
+    return (
+      <Box sx={{ 
+        display: 'flex', 
+        justifyContent: 'center', 
+        alignItems: 'center',
+        height: '200px',
+        flexDirection: 'column',
+        gap: 2
+      }}>
+        <CircularProgress />
+        <Typography variant="body1">
+          Loading orders...
+        </Typography>
+        {error && (
+          <Alert severity="warning" sx={{ maxWidth: 400 }}>
+            {error}
+          </Alert>
+        )}
+      </Box>
+    );
+  }
+
+  // Error state with retry option
+  if (error) {
+    return (
+      <Box sx={{ p: 3 }}>
+        <Alert severity="error" sx={{ mb: 2 }}>
+          {error}
+        </Alert>
+        <Button 
+          variant="contained" 
+          onClick={fetchOrders}
+          sx={{ mt: 1 }}
+          startIcon={<RefreshIcon />}
+        >
+          Retry Loading Orders
+        </Button>
+      </Box>
+    );
+  }
+
+  // Main render with data
   return (
-    <div className="orders-list-container">
-      <h1 className="orders-title">Orders Management</h1>
-      <div className="orders-table">
-        <div className="orders-table-header">
-          <div>Order ID</div>
-          <div>Customer</div>
-          <div>Product</div>
-          <div>Phone</div>
-          <div>Delivery</div>
-          <div>Status</div>
-          <div>Actions</div>
-        </div>
+    <Box sx={{ p: 3 }}>
+      <Typography variant="h4" gutterBottom>
+        Orders Management
+      </Typography>
+      
+      {success && (
+        <Alert severity="success" sx={{ mb: 2 }}>
+          {success}
+        </Alert>
+      )}
 
-        {orders.map(order => (
-          <div className="orders-table-row" key={order.id}>
-            <div>#{order.id}</div>
-            <div>{order.firstName} {order.lastName}</div>
-            <div>{order.product?.name || 'N/A'}</div>
-            <div>{order.phone}</div>
-            <div>{order.deliveryType === 'home' ? 'Home' : 'Center'}</div>
-            <div className={`status-indicator status-${order.status}`}>
-              {order.status}
-            </div>
-            <div>
-              {order.status === ORDER_STATUS.PENDING && (
-                <button
-                  className="status-update-btn"
-                  onClick={() => handleStatusUpdate(order.id)}
-                >
-                  Mark Delivered
-                </button>
-              )}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+      <TableContainer component={Paper} elevation={3}>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Order ID</TableCell>
+              <TableCell>Customer</TableCell>
+              <TableCell>Phone</TableCell>
+              <TableCell>Product ID</TableCell>
+              <TableCell>Delivery</TableCell>
+              <TableCell>Status</TableCell>
+              <TableCell>Actions</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {orders.length > 0 ? (
+              orders.map((order) => (
+                <TableRow key={order.id}>
+                  <TableCell>#{order.id}</TableCell>
+                  <TableCell>
+                    <Typography fontWeight="medium">
+                      {order.firstName} {order.lastName}
+                    </Typography>
+                    {order.address && (
+                      <Typography variant="body2" color="text.secondary">
+                        {order.address}
+                      </Typography>
+                    )}
+                  </TableCell>
+                  <TableCell>{order.phone || 'N/A'}</TableCell>
+                  <TableCell>#{order.product || 'N/A'}</TableCell>
+                  <TableCell>
+                    {order.deliveryType === 'home' ? 'Home Delivery' : 'Center Pickup'}
+                  </TableCell>
+                  <TableCell>
+                    <Typography 
+                      color={order.status === ORDER_STATUS.DELIVERED ? 'success.main' : 'warning.main'}
+                      fontWeight="bold"
+                    >
+                      {order.status.toUpperCase()}
+                    </Typography>
+                  </TableCell>
+                  <TableCell>
+                    {order.status === ORDER_STATUS.PENDING && (
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        onClick={() => handleStatusUpdate(order.id)}
+                        size="small"
+                      >
+                        Mark Delivered
+                      </Button>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
+              <TableRow>
+                <TableCell colSpan={7} align="center" sx={{ py: 4 }}>
+                  <Typography variant="body1" color="text.secondary">
+                    No orders found
+                  </Typography>
+                  <Button 
+                    variant="outlined" 
+                    onClick={fetchOrders}
+                    sx={{ mt: 2 }}
+                  >
+                    Refresh List
+                  </Button>
+                </TableCell>
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </Box>
   );
 };
 
