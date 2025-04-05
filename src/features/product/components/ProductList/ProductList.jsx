@@ -7,6 +7,7 @@ import {
 import { Edit, Delete } from '@mui/icons-material';
 import axios from 'axios';
 import { BASE_URL } from '@/config/constants';
+import { ProductService } from '@/services/productService';
 
 const ProductsList = () => {
     const [products, setProducts] = useState([]);
@@ -14,7 +15,12 @@ const ProductsList = () => {
     const [error, setError] = useState('');
     const [success, setSuccess] = useState('');
     const [editProduct, setEditProduct] = useState(null);
-    const [editedData, setEditedData] = useState({});
+    const [editedData, setEditedData] = useState({
+        name: '',
+        price: 0,
+        available_stock: 0,
+        description: ''
+    });
 
     useEffect(() => {
         const fetchProducts = async () => {
@@ -34,6 +40,49 @@ const ProductsList = () => {
         fetchProducts();
     }, []);
 
+    const handleEditClick = (product) => {
+        setEditProduct(product);
+        setEditedData({
+            name: product.name,
+            price: product.price,
+            available_stock: product.available_stock,
+            description: product.description || ''
+        });
+    };
+
+    const handleUpdate = async () => {
+        try {
+            setError('');
+            setSuccess('');
+            
+            if (!editProduct) return;
+
+            // Convert data types explicitly
+            const updateData = {
+                name: editedData.name,
+                price: parseFloat(editedData.price),
+                available_stock: parseInt(editedData.available_stock),
+                description: editedData.description
+            };
+
+            const updatedProduct = await ProductService.update(
+                editProduct.id,
+                updateData
+            );
+            
+            setProducts(prev => prev.map(p => 
+                p.id === editProduct.id ? { ...p, ...updatedProduct } : p
+            ));
+            
+            setEditProduct(null);
+            setSuccess('Product updated successfully');
+            setTimeout(() => setSuccess(''), 3000);
+        } catch (err) {
+            console.error('Update error:', err);
+            setError(err.message || 'Failed to update product');
+        }
+    };
+
     const handleDelete = async (productId) => {
         try {
             await axios.delete(`${BASE_URL}/product/${productId}/delete/`, {
@@ -49,39 +98,8 @@ const ProductsList = () => {
         }
     };
 
-    const handleEditClick = (product) => {
-        setEditProduct(product);
-        setEditedData({
-            name: product.name,
-            price: product.price,
-            available_stock: product.available_stock
-        });
-    };
-
-    const handleUpdate = async () => {
-        try {
-            const response = await axios.patch(
-                `${BASE_URL}/product/${editProduct.id}/update/`,
-                editedData,
-                {
-                    headers: {
-                        Authorization: `Token ${localStorage.getItem('token')}`
-                    }
-                }
-            );
-            
-            setProducts(prev => prev.map(p => 
-                p.id === editProduct.id ? response.data : p
-            ));
-            setEditProduct(null);
-            setSuccess('Product updated successfully');
-            setTimeout(() => setSuccess(''), 3000);
-        } catch (err) {
-            setError(err.response?.data?.message || 'Failed to update product');
-        }
-    };
-
     const formatNumber = (num) => {
+        if (!num) return '0';
         return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
     };
 
@@ -152,7 +170,7 @@ const ProductsList = () => {
                         value={editedData.price}
                         onChange={(e) => setEditedData(prev => ({
                             ...prev,
-                            price: parseFloat(e.target.value)
+                            price: e.target.value
                         }))}
                     />
                     <TextField
@@ -163,13 +181,31 @@ const ProductsList = () => {
                         value={editedData.available_stock}
                         onChange={(e) => setEditedData(prev => ({
                             ...prev,
-                            available_stock: parseInt(e.target.value)
+                            available_stock: e.target.value
+                        }))}
+                    />
+                    <TextField
+                        margin="dense"
+                        label="Description"
+                        fullWidth
+                        multiline
+                        rows={4}
+                        value={editedData.description}
+                        onChange={(e) => setEditedData(prev => ({
+                            ...prev,
+                            description: e.target.value
                         }))}
                     />
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={() => setEditProduct(null)}>Cancel</Button>
-                    <Button onClick={handleUpdate} variant="contained">Save</Button>
+                    <Button 
+                        onClick={handleUpdate} 
+                        variant="contained"
+                        disabled={!editedData.name || !editedData.price}
+                    >
+                        Save
+                    </Button>
                 </DialogActions>
             </Dialog>
         </Box>

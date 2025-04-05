@@ -1,0 +1,88 @@
+/* Dashboard.css */
+@import "@/styles/variables.css"; 
+
+.dashboard-container {
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f5f7fa;
+}
+
+.dashboard-title {
+    margin-bottom: 2rem;
+    color: #2c3e50;
+    font-weight: 600 !important;
+    text-align: center;
+}
+
+.dashboard-grid {
+    margin-bottom: 2rem;
+}
+
+.dashboard-card {
+    border-radius: 12px !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+}
+
+.card-content {
+    padding: 2rem !important;
+    text-align: center;
+}
+
+.card-title {
+    margin-bottom: 1.5rem !important;
+    color: #34495e;
+    font-weight: 500 !important;
+}
+
+.manage-button {
+    background-color: var(--primary-color) !important;
+    color: white !important;
+    padding: 10px 20px !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    text-transform: none !important;
+    transition: all 0.3s ease !important;
+}
+
+.manage-button:hover {
+    background-color: var(--primary-hover) !important;
+    transform: scale(1.02);
+}
+
+.content-container {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.back-button {
+    margin-bottom: 1.5rem !important;
+    border-radius: 8px !important;
+    padding: 8px 16px !important;
+    text-transform: none !important;
+    color: #7f8c8d !important;
+    border-color: #bdc3c7 !important;
+}
+
+.back-button:hover {
+    background-color: #f8f9fa !important;
+    border-color: #95a5a6 !important;
+}
+
+.dashboard-footer {
+    margin-top: auto;
+    padding: 1.5rem 0;
+    text-align: center;
+    color: #7f8c8d;
+    font-size: 0.9rem;
+    border-top: 1px solid #ecf0f1;
+}

@@ -2,23 +2,29 @@ import React, { useState } from 'react';
 import { Grid, Card, CardContent, Typography, Button, Box } from '@mui/material';
 import OrderList from '@/features/Order/OrderList/OrderList';
 import ProductsList from '@/features/product/components/ProductList/ProductList';
+import './Dashboard.css';
 
 const Dashboard = () => {
     const [activeView, setActiveView] = useState('overview');
 
     return (
-        <Box sx={{ p: 3 }}>
-            <Typography variant="h3" gutterBottom>Admin Dashboard</Typography>
+        <Box className="dashboard-container">
+            <Typography variant="h3" className="dashboard-title">
+                Admin Dashboard
+            </Typography>
             
             {activeView === 'overview' && (
-                <Grid container spacing={3} sx={{ mb: 4 }}>
+                <Grid container spacing={3} className="dashboard-grid">
                     <Grid item xs={12} md={6} lg={4}>
-                        <Card elevation={3}>
-                            <CardContent>
-                                <Typography variant="h5" gutterBottom>Orders</Typography>
+                        <Card elevation={3} className="dashboard-card">
+                            <CardContent className="card-content">
+                                <Typography variant="h5" className="card-title">
+                                    Orders
+                                </Typography>
                                 <Button 
                                     variant="contained" 
                                     onClick={() => setActiveView('orders')}
+                                    className="manage-button"
                                     fullWidth
                                 >
                                     Manage Orders
@@ -28,12 +34,15 @@ const Dashboard = () => {
                     </Grid>
                     
                     <Grid item xs={12} md={6} lg={4}>
-                        <Card elevation={3}>
-                            <CardContent>
-                                <Typography variant="h5" gutterBottom>Products</Typography>
+                        <Card elevation={3} className="dashboard-card">
+                            <CardContent className="card-content">
+                                <Typography variant="h5" className="card-title">
+                                    Products
+                                </Typography>
                                 <Button 
                                     variant="contained" 
                                     onClick={() => setActiveView('products')}
+                                    className="manage-button"
                                     fullWidth
                                 >
                                     Manage Products
@@ -45,29 +54,29 @@ const Dashboard = () => {
             )}
 
             {activeView === 'orders' && (
-                <>
+                <div className="content-container">
                     <Button 
                         variant="outlined" 
                         onClick={() => setActiveView('overview')}
-                        sx={{ mb: 2 }}
+                        className="back-button"
                     >
                         Back to Dashboard
                     </Button>
                     <OrderList />
-                </>
+                </div>
             )}
 
             {activeView === 'products' && (
-                <>
+                <div className="content-container">
                     <Button 
                         variant="outlined" 
                         onClick={() => setActiveView('overview')}
-                        sx={{ mb: 2 }}
+                        className="back-button"
                     >
                         Back to Dashboard
                     </Button>
                     <ProductsList />
-                </>
+                </div>
             )}
         </Box>
     );

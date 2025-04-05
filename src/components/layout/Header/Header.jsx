@@ -29,15 +29,21 @@ function Header() {
         <li>
           <Link to="/" className="nav-link">Home</Link>
         </li>
-        <li>
-          <Link to="/addProduct" className="nav-link">Add Product</Link>
-        </li>
+       
         {admin && ( // Show the Logout button only if the user is logged in
-          <li>
-            <button className="logout-button" onClick={handleLogout}>
-              Logout
-            </button>
-          </li>
+        <>
+            <li>
+              <Link to="/admin/dashboard" className="nav-link">Dashboard</Link>
+            </li>
+            <li>
+              <Link to="/addProduct" className="nav-link">Add Product</Link>
+            </li>
+            <li>
+              <button className="logout-button" onClick={handleLogout}>
+                Logout
+              </button>
+            </li>
+          </>
         )}
       </ul>
     </nav>
