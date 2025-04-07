@@ -27,7 +27,7 @@ const ProductsList = () => {
             try {
                 const response = await axios.get(`${BASE_URL}/product/list/`, {
                     headers: {
-                        Authorization: `Token ${localStorage.getItem('token')}`
+                        Authorization: `Token ${localStorage.getItem('adminToken')}`
                     }
                 });
                 setProducts(response.data);

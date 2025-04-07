@@ -27,7 +27,7 @@ const OrdersList = () => {
   const [selectedOrder, setSelectedOrder] = useState(null);
 
   const checkAuth = () => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('adminToken');
     if (!token) {
       navigate('/admin/login');
       return false;
@@ -44,12 +44,12 @@ const OrdersList = () => {
 
       const response = await fetch(`${BASE_URL}${API_ENDPOINTS.ORDERS_LIST}`, {
         headers: {
-          'Authorization': `Token ${localStorage.getItem('token')}`
+          'Authorization': `Token ${localStorage.getItem('adminToken')}`
         }
       });
 
       if (response.status === 401) {
-        localStorage.removeItem('token');
+        localStorage.removeItem('adminToken');
         navigate('/admin/login');
         return;
       }
@@ -86,7 +86,7 @@ const OrdersList = () => {
           method: 'PATCH',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Token ${localStorage.getItem('token')}`
+            'Authorization': `Token ${localStorage.getItem('adminToken')}`
           },
           body: JSON.stringify({ status: ORDER_STATUS.DELIVERED })
         }
