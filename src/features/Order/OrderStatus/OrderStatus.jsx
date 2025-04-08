@@ -2,6 +2,7 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import './OrderStatus.css';
+import CheckCircleIcon from '@mui/icons-material/CheckCircle'; 
 
 const OrderStatus = () => {
   const location = useLocation();
@@ -13,7 +14,11 @@ const OrderStatus = () => {
 
   return (
     <div className="order-status-container">
-      <h2>{isSuccess ? '🎉 Order Successful!' : '❌ Order Failed'}</h2>
+      <h2>{isSuccess ? (
+            <CheckCircleIcon color="success" className="order-status-icon" />
+          ) : (
+            <ErrorOutlineIcon color="error" className="order-status-icon" />
+          )}</h2>
       <p>{message}</p>
       <button 
         className="back-button"
