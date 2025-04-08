@@ -77,7 +77,7 @@ function ProductForm() {
         formData.append("images", image);
       });
 
-      const token = localStorage.getItem('token');
+      const token = localStorage.getItem('adminToken');
       const response = await fetch(`${BASE_URL}/product/add/`, {
         method: "POST",
         body: formData,

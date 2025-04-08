@@ -10,7 +10,12 @@ import {
 } from '@/config/constants';
 import './OrderForm.css';
 import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
+
+// Import JSON data
+import wilayasData from '../../../data/wilayas.json';
+import communesData from '../../../data/communes.json';
 
 const OrderForm = () => {
   const { productId } = useParams();
@@ -20,13 +25,19 @@ const OrderForm = () => {
     lastName: '',
     phone: '',
     address: '',
+    wilaya: '',
+    commune: '',
     deliveryType: 'home',
     quantity: 1,
   });
   const [error, setError] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [product, setProduct] = useState(null);
-  const [available_stock, setAvailableStock] = useState(0);
+  const [availableStock, setAvailableStock] = useState(0);
+  const [filteredCommunes, setFilteredCommunes] = useState([]);
+  const [selectedWilayaName, setSelectedWilayaName] = useState('');
+  const [selectedCommuneName, setSelectedCommuneName] = useState('');
+  const [selectedPostalCode, setSelectedPostalCode] = useState('');
 
   // Format numbers with thousand separators
   const formatNumber = (num) => {
@@ -37,6 +48,28 @@ const OrderForm = () => {
   const formatPrice = (price) => {
     return parseFloat(price).toFixed(2).replace('.', ',');
   };
+
+  // Filter communes when wilaya is selected
+  useEffect(() => {
+    if (formData.wilaya) {
+      const communes = communesData.filter(commune => commune.wilaya_id === formData.wilaya);
+      setFilteredCommunes(communes);
+      setFormData(prev => ({ ...prev, commune: '' }));
+      
+      // Set wilaya name
+      const selectedWilaya = wilayasData.find(w => w.id === formData.wilaya);
+      setSelectedWilayaName(selectedWilaya?.name || '');
+    }
+  }, [formData.wilaya]);
+
+  // Set commune name and postal code when commune is selected
+  useEffect(() => {
+    if (formData.commune) {
+      const selectedCommune = filteredCommunes.find(c => c.id === formData.commune);
+      setSelectedCommuneName(selectedCommune?.name || '');
+      setSelectedPostalCode(selectedCommune?.post_code || '00000');
+    }
+  }, [formData.commune, filteredCommunes]);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -63,20 +96,21 @@ const OrderForm = () => {
     setIsSubmitting(true);
     setError('');
     
-    if (available_stock < 1) {
+    if (availableStock < 1) {
       setError('This product is currently out of stock');
       setIsSubmitting(false);
       return;
     }
 
-    if (!formData.firstName || !formData.lastName || !formData.phone || !formData.address) {
+    if (!formData.firstName || !formData.lastName || !formData.phone || 
+        !formData.address || !formData.wilaya || !formData.commune) {
       setError('All fields are required');
       setIsSubmitting(false);
       return;
     }
 
-    if (formData.quantity < 1 || formData.quantity > available_stock) {
-      setError(`Please enter a quantity between 1 and ${formatNumber(available_stock)}`);
+    if (formData.quantity < 1 || formData.quantity > availableStock) {
+      setError(`Please enter a quantity between 1 and ${formatNumber(availableStock)}`);
       setIsSubmitting(false);
       return;
     }
@@ -88,7 +122,10 @@ const OrderForm = () => {
           ...formData,
           product: productId,
           status: ORDER_STATUS.PENDING,
-          total_price: product.price * formData.quantity
+          total_price: product.price * formData.quantity,
+          wilaya_name: selectedWilayaName,
+          commune_name: selectedCommuneName,
+          postal_code: selectedPostalCode
         },
         {
           headers: {
@@ -127,7 +164,7 @@ const OrderForm = () => {
       const numericValue = value.replace(/\D/g, '');
       newValue = numericValue === '' ? 1 : Math.min(
         Math.max(1, parseInt(numericValue, 10)),
-        available_stock
+        availableStock
       );
     }
 
@@ -146,8 +183,8 @@ const OrderForm = () => {
         <h3>{product.name}</h3>
         <p>{product.description}</p>
         <p className="price">{formatPrice(product.price)} DZD (per unit)</p>
-        <p className={`stock ${available_stock === 0 ? 'out-of-stock' : ''}`}>
-          Available: {formatNumber(available_stock)} units
+        <p className={`stock ${availableStock === 0 ? 'out-of-stock' : ''}`}>
+          Available: {formatNumber(availableStock)} units
         </p>
       </div>
 
@@ -184,6 +221,43 @@ const OrderForm = () => {
           margin="normal"
         />
 
+        {/* Wilaya Selection */}
+        <TextField
+          select
+          label="Wilaya"
+          name="wilaya"
+          value={formData.wilaya}
+          onChange={handleChange}
+          fullWidth
+          required
+          margin="normal"
+        >
+          {wilayasData.map((wilaya) => (
+            <MenuItem key={wilaya.id} value={wilaya.id}>
+              {wilaya.name} ({wilaya.ar_name})
+            </MenuItem>
+          ))}
+        </TextField>
+
+        {/* Commune Selection */}
+        <TextField
+          select
+          label="Commune"
+          name="commune"
+          value={formData.commune}
+          onChange={handleChange}
+          fullWidth
+          required
+          margin="normal"
+          disabled={!formData.wilaya}
+        >
+          {filteredCommunes.map((commune) => (
+            <MenuItem key={commune.id} value={commune.id}>
+              {commune.name} ({commune.post_code})
+            </MenuItem>
+          ))}
+        </TextField>
+
         <TextField
           label="Address"
           name="address"
@@ -205,15 +279,15 @@ const OrderForm = () => {
           fullWidth
           required
           margin="normal"
-          disabled={available_stock === 0}
+          disabled={availableStock === 0}
           inputProps={{ 
             pattern: '[0-9]*',
             inputMode: 'numeric'
           }}
-          error={formData.quantity > available_stock}
+          error={formData.quantity > availableStock}
           helperText={
-            formData.quantity > available_stock 
-              ? `Maximum ${formatNumber(available_stock)} items available`
+            formData.quantity > availableStock 
+              ? `Maximum ${formatNumber(availableStock)} items available`
               : ''
           }
         />
@@ -244,7 +318,7 @@ const OrderForm = () => {
           </div>
         </div>
 
-        {available_stock > 0 && (
+        {availableStock > 0 && (
           <div className="order-summary">
             <h4>Order Summary</h4>
             <p>Unit Price: {formatPrice(product.price)} DZD</p>
@@ -262,10 +336,10 @@ const OrderForm = () => {
           variant="contained" 
           color="primary"
           fullWidth
-          disabled={isSubmitting || available_stock === 0}
+          disabled={isSubmitting || availableStock === 0}
           sx={{ mt: 3, mb: 2 }}
         >
-          {available_stock === 0 ? 'Out of Stock' : 
+          {availableStock === 0 ? 'Out of Stock' : 
            isSubmitting ? 'Processing...' : 'Place Order'}
         </Button>
       </form>

@@ -87,7 +87,7 @@ const ProductsList = () => {
         try {
             await axios.delete(`${BASE_URL}/product/${productId}/delete/`, {
                 headers: {
-                    Authorization: `Token ${localStorage.getItem('token')}`
+                    Authorization: `adminToken ${localStorage.getItem('adminToken')}`
                 }
             });
             setProducts(prev => prev.filter(p => p.id !== productId));
