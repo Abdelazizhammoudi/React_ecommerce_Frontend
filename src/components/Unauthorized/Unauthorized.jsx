@@ -8,24 +8,24 @@ const Unauthorized = () => {
 
   return (
     <div className="unauthorized-container">
-      <h1>403 - Access Denied</h1>
+      <h1>403 - تم رفض الوصول</h1>
       <p>
         {reason || 'You do not have the necessary permissions to view this page.'}
       </p>
       {from && (
         <p>
-          You tried to access: <code>{from.pathname}</code>
+          لقد حاولت الوصول : <code>{from.pathname}</code>
         </p>
       )}
       <p>
-        If you believe this is a mistake, please contact the administrator or try logging in again.
+      إذا كنت تعتقد أن هذا خطأ، يرجى التواصل مع المسؤول أو محاولة تسجيل الدخول مرة أخرى.
       </p>
       <div className="action-buttons">
         <a href="/admin/login" className="login-link">
-          Go to Login
+        تسجيل الدخول
         </a>
         <a href="/" className="home-link">
-          Return to Home
+        الرجوع إلى الصفحة الرئيسية
         </a>
       </div>
     </div>

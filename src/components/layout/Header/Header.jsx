@@ -27,20 +27,20 @@ function Header() {
       </div>
       <ul className="nav-links">
         <li>
-          <Link to="/" className="nav-link">Home</Link>
+          <Link to="/" className="nav-link">الصفحة الرئيسية</Link>
         </li>
        
         {admin && ( // Show the Logout button only if the user is logged in
         <>
             <li>
-              <Link to="/admin/dashboard" className="nav-link">Dashboard</Link>
+              <Link to="/admin/dashboard" className="nav-link">لوحة التحكم</Link>
             </li>
             <li>
-              <Link to="/addProduct" className="nav-link">Add Product</Link>
+              <Link to="/addProduct" className="nav-link">إضافة منتج</Link>
             </li>
             <li>
               <button className="logout-button" onClick={handleLogout}>
-                Logout
+              تسجيل الخروج
               </button>
             </li>
           </>

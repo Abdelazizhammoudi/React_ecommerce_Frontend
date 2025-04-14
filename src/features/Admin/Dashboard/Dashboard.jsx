@@ -10,7 +10,7 @@ const Dashboard = () => {
     return (
         <Box className="dashboard-container">
             <Typography variant="h3" className="dashboard-title">
-                Admin Dashboard
+            لوحة تحكم الإدارة
             </Typography>
             
             {activeView === 'overview' && (
@@ -19,15 +19,15 @@ const Dashboard = () => {
                         <Card elevation={3} className="dashboard-card">
                             <CardContent className="card-content">
                                 <Typography variant="h5" className="card-title">
-                                    Orders
-                                </Typography>
+                                الطلبات     
+                                </Typography>   
                                 <Button 
                                     variant="contained" 
                                     onClick={() => setActiveView('orders')}
                                     className="manage-button"
                                     fullWidth
                                 >
-                                    Manage Orders
+                                    إدارة الطلبات
                                 </Button>
                             </CardContent>
                         </Card>
@@ -37,7 +37,7 @@ const Dashboard = () => {
                         <Card elevation={3} className="dashboard-card">
                             <CardContent className="card-content">
                                 <Typography variant="h5" className="card-title">
-                                    Products
+                                المنتجات
                                 </Typography>
                                 <Button 
                                     variant="contained" 
@@ -45,7 +45,7 @@ const Dashboard = () => {
                                     className="manage-button"
                                     fullWidth
                                 >
-                                    Manage Products
+                                    إدارة المنتجات
                                 </Button>
                             </CardContent>
                         </Card>
@@ -60,7 +60,7 @@ const Dashboard = () => {
                         onClick={() => setActiveView('overview')}
                         className="back-button"
                     >
-                        Back to Dashboard
+                             الرجوع إلى لوحة التحكم
                     </Button>
                     <OrderList />
                 </div>
@@ -73,7 +73,7 @@ const Dashboard = () => {
                         onClick={() => setActiveView('overview')}
                         className="back-button"
                     >
-                        Back to Dashboard
+                            الرجوع إلى لوحة التحكم
                     </Button>
                     <ProductsList />
                 </div>

@@ -24,38 +24,38 @@ const OrderDetail = ({
       className="order-detail-modal"
     >
       <DialogTitle className="order-detail-title">
-        Order Details #{order.id}
+        تفاصيل الطلب  #{order.id}
       </DialogTitle>
       <DialogContent dividers>
         <Box className="order-detail-section">
-          <Typography variant="h6" gutterBottom>Customer Information</Typography>
+          <Typography variant="h6" gutterBottom>معلومات العميل</Typography>
           <Divider className="order-detail-divider" />
           <DialogContentText component="div">
             <Box className="order-detail-field">
-              <strong>Name:</strong> {order.firstName} {order.lastName}
+              <strong>الاسم:</strong> {order.firstName} {order.lastName}
             </Box>
             <Box className="order-detail-field">
-              <strong>Phone:</strong> {order.phone}
+              <strong>الهاتف :</strong> {order.phone}
             </Box>
             <Box className="order-detail-field">
-              <strong>Address:</strong> {order.address}
+              <strong>العنوان:</strong> {order.address}
             </Box>
           </DialogContentText>
         </Box>
 
         <Box className="order-detail-section">
-          <Typography variant="h6" gutterBottom>Order Information</Typography>
+          <Typography variant="h6" gutterBottom>معلومات الطلب</Typography>
           <Divider className="order-detail-divider" />
           <DialogContentText component="div">
             <Box className="order-detail-field">
-              <strong>Product ID:</strong> #{order.product}
+              <strong>معرف المنتج:</strong> #{order.product}
             </Box>
             <Box className="order-detail-field">
-              <strong>Delivery Type:</strong> {order.deliveryType === 'home' ? 
+              <strong>نوع التوصيل:</strong> {order.deliveryType === 'home' ? 
                 'Home Delivery' : 'Center Pickup'}
             </Box>
             <Box className="order-detail-field">
-              <strong>Status:</strong> 
+              <strong>الحالة:</strong> 
               <Chip
                 label={order.status}
                 color={order.status === 'delivered' ? 'success' : 'warning'}
@@ -65,7 +65,7 @@ const OrderDetail = ({
               />
             </Box>
             <Box className="order-detail-field">
-              <strong>Date:</strong> {new Date(order.created_at).toLocaleString()}
+              <strong>التاريخ:</strong> {new Date(order.created_at).toLocaleString()}
             </Box>
           </DialogContentText>
         </Box>
@@ -82,7 +82,7 @@ const OrderDetail = ({
               startIcon={<CheckCircleIcon />}
               className="mark-delivered-btn"
             >
-              Mark as Delivered
+              تم التوصيل
             </Button>
           </Box>
         )}

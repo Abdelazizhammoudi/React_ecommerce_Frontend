@@ -21,7 +21,7 @@ const AdminLogin = () => {
 
   return (
     <div className="admin-login">
-      <h2>Admin Portal</h2>
+      <h2>بوابة الإدارة</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -38,7 +38,7 @@ const AdminLogin = () => {
           autoComplete="current-password"
         />
         {error && <div className="error">{error}</div>}
-        <button type="submit">Login</button>
+        <button type="submit">تسجيل الدخول</button>
       </form>
     </div>
   );

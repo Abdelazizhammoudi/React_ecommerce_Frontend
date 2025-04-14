@@ -16,7 +16,7 @@ const AdminRoute = () => {
   });
 
   if (loading) {
-    return <div className="admin-loading">Verifying permissions...</div>;
+    return <div className="admin-loading"> ...جارٍ التحقق من الصلاحيات</div>;
   }
 
   if (!token || !admin?.isAdmin) {
