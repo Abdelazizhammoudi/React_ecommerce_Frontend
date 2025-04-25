@@ -17,6 +17,12 @@
     transition: color 0.3s;
   }
   
-  /* .admin-login-link:hover {
-    color: var(--primary-hover);
-  } */
+  
+[dir="rtl"] .footer {
+  text-align: center;
+}
+
+[dir="rtl"] .admin-login-link {
+  margin-right: 0;
+  margin-left: 8px;
+}

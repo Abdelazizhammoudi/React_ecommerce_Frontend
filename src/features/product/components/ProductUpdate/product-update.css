@@ -187,3 +187,26 @@
 .back-link:hover {
   color: var(--primary-hover);
 }
+
+[dir="rtl"] .product-update-container {
+  text-align: right;
+}
+
+[dir="rtl"] .back-link {
+  direction: rtl;
+}
+
+[dir="rtl"] .form-group label {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+[dir="rtl"] .delete-image-button {
+  left: 5px;
+  right: auto;
+}
+
+[dir="rtl"] .MuiButton-startIcon {
+  margin-left: 8px;
+  margin-right: -4px;
+}

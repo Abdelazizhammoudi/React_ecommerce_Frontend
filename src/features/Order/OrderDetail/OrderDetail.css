@@ -39,3 +39,25 @@
   .close-btn {
     text-transform: none;
   }
+
+[dir="rtl"] .order-detail-field {
+  text-align: right;
+}
+
+[dir="rtl"] .order-detail-title {
+  text-align: right;
+}
+
+[dir="rtl"] .order-status-chip {
+  margin-right: 8px;
+  margin-left: 0;
+}
+
+[dir="rtl"] .mark-delivered-btn {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .close-btn {
+  margin-left: 0;
+  margin-right: auto;
+}

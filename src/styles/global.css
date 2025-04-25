@@ -4,6 +4,20 @@ body {
     background: var(--background-light);
   }
 
+/* Translation */
+  [dir="rtl"] .header {
+    flex-direction: row-reverse;
+  }
+  
+  [dir="rtl"] .nav-links {
+    flex-direction: row-reverse;
+  }
+  
+  [dir="rtl"] .language-switcher {
+    flex-direction: row-reverse;
+  }
+
+
   /* Buttons */
   button {
     padding: var(--space-sm) var(--space-md);

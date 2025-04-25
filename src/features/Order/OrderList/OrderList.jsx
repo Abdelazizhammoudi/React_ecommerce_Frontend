@@ -25,8 +25,10 @@ import {
   CalendarToday as DateIcon,
   Close as CloseIcon
 } from '@mui/icons-material';
+import { useTranslation } from 'react-i18next';
 
 const OrdersList = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -136,7 +138,7 @@ const OrdersList = () => {
   if (error) {
     return (
       <Alert severity="error" sx={{ m: 2 }}>
-        {error}
+        {t(error)}
       </Alert>
     );
   }
@@ -145,9 +147,9 @@ const OrdersList = () => {
     return (
       <Box sx={{ p: 3 }}>
         <Typography variant="h4" sx={{ mb: 3 }}>
-          Orders Management
+          {t('orderList.title')}
         </Typography>
-        <Alert severity="info">No orders found</Alert>
+        <Alert severity="info">{t('orderList.noOrders')}</Alert>
       </Box>
     );
   }
@@ -155,12 +157,12 @@ const OrdersList = () => {
   return (
     <Box sx={{ p: 3 }}>
       <Typography variant="h4" sx={{ mb: 3 }}>
-        Orders Management
+        {t('orderList.title')}
       </Typography>
       
       {success && (
         <Alert severity="success" sx={{ mb: 2 }}>
-          {success}
+          {t(success)}
         </Alert>
       )}
 
@@ -172,7 +174,7 @@ const OrdersList = () => {
                 <Grid container alignItems="center" spacing={2}>
                   <Grid item xs={12} sm={3}>
                     <Typography variant="subtitle1">
-                      <strong>Order #{order.id}</strong>
+                      <strong>{t('orderList.orderNumber', { id: order.id })}</strong>
                     </Typography>
                     <Typography variant="body2">
                       {order.firstName} {order.lastName}
@@ -181,13 +183,13 @@ const OrdersList = () => {
                   
                   <Grid item xs={12} sm={3}>
                     <Typography variant="body2">
-                      <strong>Product:</strong> #{order.product}
+                      <strong>{t('orderList.product')}:</strong> #{order.product}
                     </Typography>
                   </Grid>
                   
                   <Grid item xs={12} sm={2}>
                     <Chip
-                      label={order.status}
+                      label={t(`orderList.status.${order.status}`)}
                       color={order.status === ORDER_STATUS.DELIVERED ? 'success' : 'warning'}
                       icon={order.status === ORDER_STATUS.DELIVERED ? 
                         <CheckCircleIcon /> : <PendingIcon />}
@@ -202,7 +204,7 @@ const OrdersList = () => {
                       startIcon={<InfoIcon />}
                       onClick={() => handleOpenDetails(order)}
                     >
-                      Details
+                      {t('orderList.actions.details')}
                     </Button>
                     {order.status === ORDER_STATUS.PENDING && (
                       <Button
@@ -212,7 +214,7 @@ const OrdersList = () => {
                         startIcon={<CheckCircleIcon />}
                         onClick={() => handleStatusUpdate(order.id)}
                       >
-                        Deliver
+                        {t('orderList.actions.deliver')}
                       </Button>
                     )}
                   </Grid>
@@ -231,7 +233,7 @@ const OrdersList = () => {
         fullWidth
       >
         <DialogTitle>
-          Order Details #{selectedOrder?.id}
+          {t('orderList.details.title', { id: selectedOrder?.id })}
           <Button 
             onClick={handleCloseDetails}
             sx={{ position: 'absolute', right: 8, top: 8 }}
@@ -243,51 +245,52 @@ const OrdersList = () => {
           {selectedOrder && (
             <Grid container spacing={3}>
               <Grid item xs={12} md={6}>
-                <Typography variant="h6" gutterBottom>Customer Information</Typography>
-                <Typography><strong>Name:</strong> {selectedOrder.firstName} {selectedOrder.lastName}</Typography>
-                <Typography><PhoneIcon fontSize="small" /> <strong>Phone:</strong> {selectedOrder.phone}</Typography>
-                <Typography><DateIcon fontSize="small" /> <strong>Date:</strong> {new Date(selectedOrder.created_at).toLocaleString()}</Typography>
+                <Typography variant="h6" gutterBottom>{t('orderList.details.customerInfo')}</Typography>
+                <Typography><strong>{t('orderList.details.name')}:</strong> {selectedOrder.firstName} {selectedOrder.lastName}</Typography>
+                <Typography><PhoneIcon fontSize="small" /> <strong>{t('orderList.details.phone')}:</strong> {selectedOrder.phone}</Typography>
+                <Typography><DateIcon fontSize="small" /> <strong>{t('orderList.details.date')}:</strong> {new Date(selectedOrder.created_at).toLocaleString()}</Typography>
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <Typography variant="h6" gutterBottom>Order Information</Typography>
-                <Typography><strong>Status:</strong> 
+                <Typography variant="h6" gutterBottom>{t('orderList.details.orderInfo')}</Typography>
+                <Typography>
+                  <strong>{t('orderList.details.status')}:</strong> 
                   <Chip
-                    label={selectedOrder.status}
+                    label={t(`orderList.status.${selectedOrder.status}`)}
                     color={selectedOrder.status === ORDER_STATUS.DELIVERED ? 'success' : 'warning'}
                     size="small"
                     sx={{ ml: 1 }}
                   />
                 </Typography>
-                <Typography><strong>Product ID:</strong> #{selectedOrder.product}</Typography>
-                <Typography><strong>Quantity:</strong> {selectedOrder.quantity}</Typography>
-                <Typography><strong>Total Price:</strong> {selectedOrder.total_price} DZD</Typography>
+                <Typography><strong>{t('orderList.details.productId')}:</strong> #{selectedOrder.product}</Typography>
+                <Typography><strong>{t('orderList.details.quantity')}:</strong> {selectedOrder.quantity}</Typography>
+                <Typography><strong>{t('orderList.details.totalPrice')}:</strong> {selectedOrder.total_price} {t('common.currency')}</Typography>
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <Typography variant="h6" gutterBottom>Delivery Information</Typography>
+                <Typography variant="h6" gutterBottom>{t('orderList.details.deliveryInfo')}</Typography>
                 <Typography>
-                  <strong>Type:</strong> 
+                  <strong>{t('orderList.details.type')}:</strong> 
                   {selectedOrder.deliveryType === 'home' ? (
-                    <span><HomeIcon fontSize="small" sx={{ ml: 0.5 }} /> Home Delivery</span>
+                    <span><HomeIcon fontSize="small" sx={{ ml: 0.5 }} /> {t('orderList.details.deliveryTypes.home')}</span>
                   ) : (
-                    <span><StoreIcon fontSize="small" sx={{ ml: 0.5 }} /> Delivery Center</span>
+                    <span><StoreIcon fontSize="small" sx={{ ml: 0.5 }} /> {t('orderList.details.deliveryTypes.center')}</span>
                   )}
                 </Typography>
               </Grid>
 
               <Grid item xs={12} md={6}>
-                <Typography variant="h6" gutterBottom>Location Information</Typography>
-                <Typography><LocationIcon fontSize="small" /> <strong>Wilaya:</strong> {selectedOrder.wilaya_name} ({selectedOrder.wilaya})</Typography>
-                <Typography><LocationIcon fontSize="small" /> <strong>Commune:</strong> {selectedOrder.commune_name} ({selectedOrder.commune})</Typography>
-                <Typography><strong>Postal Code:</strong> {selectedOrder.postal_code}</Typography>
-                <Typography><strong>Address:</strong> {selectedOrder.address}</Typography>
+                <Typography variant="h6" gutterBottom>{t('orderList.details.locationInfo')}</Typography>
+                <Typography><LocationIcon fontSize="small" /> <strong>{t('orderList.details.wilaya')}:</strong> {selectedOrder.wilaya_name} ({selectedOrder.wilaya})</Typography>
+                <Typography><LocationIcon fontSize="small" /> <strong>{t('orderList.details.commune')}:</strong> {selectedOrder.commune_name} ({selectedOrder.commune})</Typography>
+                <Typography><strong>{t('orderList.details.postalCode')}:</strong> {selectedOrder.postal_code}</Typography>
+                <Typography><strong>{t('orderList.details.address')}:</strong> {selectedOrder.address}</Typography>
               </Grid>
             </Grid>
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseDetails}>Close</Button>
+          <Button onClick={handleCloseDetails}>{t('common.close')}</Button>
         </DialogActions>
       </Dialog>
     </Box>

@@ -4,6 +4,7 @@ import {
   Dialog, DialogTitle, DialogContent, DialogContentText,
   DialogActions, Button, Chip, Divider, Box, Typography
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PendingIcon from '@mui/icons-material/Pending';
 import '@/features/Order/OrderDetail/OrderDetail.css';
@@ -14,6 +15,8 @@ const OrderDetail = ({
   onClose, 
   onStatusUpdate 
 }) => {
+  const { t } = useTranslation();
+  
   if (!order) return null;
 
   return (
@@ -24,40 +27,40 @@ const OrderDetail = ({
       className="order-detail-modal"
     >
       <DialogTitle className="order-detail-title">
-        Order Details #{order.id}
+        {t('orderDetail.title')} #{order.id}
       </DialogTitle>
       <DialogContent dividers>
         <Box className="order-detail-section">
-          <Typography variant="h6" gutterBottom>Customer Information</Typography>
+          <Typography variant="h6" gutterBottom>{t('orderDetail.customerInfo.title')}</Typography>
           <Divider className="order-detail-divider" />
           <DialogContentText component="div">
             <Box className="order-detail-field">
-              <strong>Name:</strong> {order.firstName} {order.lastName}
+              <strong>{t('orderDetail.customerInfo.name')}:</strong> {order.firstName} {order.lastName}
             </Box>
             <Box className="order-detail-field">
-              <strong>Phone:</strong> {order.phone}
+              <strong>{t('orderDetail.customerInfo.phone')}:</strong> {order.phone}
             </Box>
             <Box className="order-detail-field">
-              <strong>Address:</strong> {order.address}
+              <strong>{t('orderDetail.customerInfo.address')}:</strong> {order.address}
             </Box>
           </DialogContentText>
         </Box>
 
         <Box className="order-detail-section">
-          <Typography variant="h6" gutterBottom>Order Information</Typography>
+          <Typography variant="h6" gutterBottom>{t('orderDetail.orderInfo.title')}</Typography>
           <Divider className="order-detail-divider" />
           <DialogContentText component="div">
             <Box className="order-detail-field">
-              <strong>Product ID:</strong> #{order.product}
+              <strong>{t('orderDetail.orderInfo.productId')}:</strong> #{order.product}
             </Box>
             <Box className="order-detail-field">
-              <strong>Delivery Type:</strong> {order.deliveryType === 'home' ? 
-                'Home Delivery' : 'Center Pickup'}
+              <strong>{t('orderDetail.orderInfo.deliveryType')}:</strong> 
+              {t(`orderDetail.orderInfo.deliveryOptions.${order.deliveryType}`)}
             </Box>
             <Box className="order-detail-field">
-              <strong>Status:</strong> 
+              <strong>{t('orderDetail.orderInfo.status')}:</strong> 
               <Chip
-                label={order.status}
+                label={t(`orderDetail.orderInfo.statusOptions.${order.status}`)}
                 color={order.status === 'delivered' ? 'success' : 'warning'}
                 className="order-status-chip"
                 icon={order.status === 'delivered' ? 
@@ -65,7 +68,8 @@ const OrderDetail = ({
               />
             </Box>
             <Box className="order-detail-field">
-              <strong>Date:</strong> {new Date(order.created_at).toLocaleString()}
+              <strong>{t('orderDetail.orderInfo.date')}:</strong> 
+              {new Date(order.created_at).toLocaleString()}
             </Box>
           </DialogContentText>
         </Box>
@@ -82,13 +86,15 @@ const OrderDetail = ({
               startIcon={<CheckCircleIcon />}
               className="mark-delivered-btn"
             >
-              Mark as Delivered
+              {t('orderDetail.actions.markDelivered')}
             </Button>
           </Box>
         )}
       </DialogContent>
       <DialogActions>
-        <Button onClick={onClose} className="close-btn">Close</Button>
+        <Button onClick={onClose} className="close-btn">
+          {t('orderDetail.actions.close')}
+        </Button>
       </DialogActions>
     </Dialog>
   );

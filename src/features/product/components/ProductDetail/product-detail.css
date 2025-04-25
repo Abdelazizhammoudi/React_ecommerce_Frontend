@@ -123,3 +123,28 @@
 .buy-now-button:hover {
   background: var(--primary-hover);
 }
+
+
+[dir="rtl"] .product-detail-container {
+  text-align: right;
+}
+
+[dir="rtl"] .product-info {
+  direction: rtl;
+}
+
+[dir="rtl"] .nav-button.prev {
+  right: 10px;
+  left: auto;
+  transform: rotate(180deg);
+}
+
+[dir="rtl"] .nav-button.next {
+  left: 10px;
+  right: auto;
+  transform: rotate(180deg);
+}
+
+[dir="rtl"] .product-actions {
+  flex-direction: row-reverse;
+}

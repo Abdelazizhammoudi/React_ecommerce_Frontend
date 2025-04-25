@@ -66,3 +66,25 @@
   @keyframes spin {
     to { transform: rotate(360deg); }
   }
+
+
+  [dir="rtl"] .order-form-container {
+    text-align: right;
+  }
+  
+  [dir="rtl"] .form-row {
+    flex-direction: row-reverse;
+  }
+  
+  [dir="rtl"] .delivery-options label {
+    margin-right: 0;
+    margin-left: 20px;
+  }
+  
+  [dir="rtl"] .order-summary {
+    text-align: right;
+  }
+  
+  [dir="rtl"] .error-message {
+    text-align: right;
+  }

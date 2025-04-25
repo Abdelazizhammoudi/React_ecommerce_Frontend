@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useTranslation } from 'react-i18next';
 import { BASE_URL } from "@/config/constants";
 import "@/styles/global.css";
 import "./product-form.css";
 import TextField from '@mui/material/TextField';
 
 function ProductForm() {
+  const { t } = useTranslation();
   const [product, setProduct] = useState({
     name: "",
     description: "",
@@ -113,24 +115,21 @@ function ProductForm() {
 
   return (
     <div className="product-form-container">
-      <h2>Add New Product</h2>
+      <h2>{t('productForm.title')}</h2>
       
       <form onSubmit={handleSubmit} className="product-form">
-
           <TextField
-            label="Product Name"
+            label={t('productForm.fields.name')}
             type="text"
             name="name"
-            placeholder="Product name"
+            placeholder={t('productForm.placeholders.name')}
             value={product.name}
             onChange={handleChange}
             required
           />
-        
 
-        {/* <div className="form-group"> */}
           <TextField
-            label="Description"
+            label={t('productForm.fields.description')}
             name="description"
             value={product.description}
             onChange={handleChange}
@@ -139,32 +138,32 @@ function ProductForm() {
             fullWidth
             multiline
             rows={3}
+            placeholder={t('productForm.placeholders.description')}
           />
-        {/* </div> */}
 
           <TextField
-            label="Price"
+            label={t('productForm.fields.price')}
             type="text"
             name="price"
             value={formattedPrice}
-            placeholder="0,00"
+            placeholder={t('productForm.placeholders.price')}
             onChange={handlePriceChange}
             required
           />
 
           <TextField
-            label="Available Stock"
+            label={t('productForm.fields.stock')}
             type="text"
             name="available_stock"
             value={product.available_stock === 0 ? '' : formatNumber(product.available_stock)}
-            placeholder="0"
+            placeholder={t('productForm.placeholders.stock')}
             onChange={handleStockChange}
             inputMode="numeric"
             required
           />
 
         <div className="form-group">
-          <label>Upload Images:</label>
+          <label>{t('productForm.fields.images')}</label>
           <input
             type="file"
             multiple
@@ -174,19 +173,19 @@ function ProductForm() {
         </div>
 
         <button type="submit" className="primary-button" disabled={loading}>
-          {loading ? "Adding..." : "Add Product"}
+          {loading ? t('productForm.buttons.adding') : t('productForm.buttons.add')}
         </button>
       </form>
 
       {product.images.length > 0 && (
         <div className="image-preview">
-          <h3>Preview:</h3>
+          <h3>{t('productForm.preview.title')}</h3>
           <div className="preview-images">
             {product.images.map((image, index) => (
               <img
                 key={index}
                 src={URL.createObjectURL(image)}
-                alt={`Preview ${index + 1}`}
+                alt={t('productForm.preview.imageAlt', { number: index + 1 })}
                 className="preview-image"
               />
             ))}
@@ -194,8 +193,8 @@ function ProductForm() {
         </div>
       )}
 
-      {error && <div className="error-message">{error}</div>}
-      {success && <div className="success-message">{success}</div>}
+      {error && <div className="error-message">{t(error)}</div>}
+      {success && <div className="success-message">{t(success)}</div>}
     </div>
   );
 }

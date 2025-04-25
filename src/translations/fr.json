@@ -1,0 +1,321 @@
+{
+    "nav": {
+      "home": "Accueil",
+      "products": "Produits",
+      "cart": "Panier",
+      "dashboard": "Tableau de bord",
+      "login": "Connexion",
+      "logout": "Déconnexion",
+      "addProduct": "Ajouter un Produit",
+      "logoAlt": "Logo du Magasin"
+    },
+    "footer": {
+      "rights": "© 2025 My Shop. Tous droits réservés.",
+      "madeBy": "Fait avec ❤️ par Abdelaziz HAMMOUDI",
+      "admin": "Admin"
+    },
+    "admin": {
+      "login": {
+        "title": "Connexion Admin",
+        "username": "Nom d'utilisateur",
+        "password": "Mot de passe",
+        "submit": "Connexion"
+      },
+      "route": {
+        "verifying": "Vérification des autorisations...",
+        "missingToken": "Jeton d'authentification manquant",
+        "adminRequired": "Privilèges administrateur requis"
+      }
+    },
+    "notFound": {
+      "title": "404 - Page Non Trouvée",
+      "message": "Oups ! La page que vous recherchez n'existe pas.",
+      "goHome": "Retour à l'Accueil"
+    },
+    "unauthorized": {
+      "title": "403 - Accès Refusé",
+      "defaultMessage": "Vous n'avez pas les autorisations nécessaires pour voir cette page.",
+      "attemptedAccess": "Vous avez essayé d'accéder à :",
+      "contactAdmin": "Si vous pensez qu'il s'agit d'une erreur, veuillez contacter l'administrateur ou essayez de vous reconnecter.",
+      "loginButton": "Aller à la connexion",
+      "homeButton": "Retour à l'accueil"
+    },
+    "error": {
+      "boundary": {
+        "message": "Une erreur s'est produite. Veuillez réessayer plus tard."
+      }
+    },
+    "auth": {
+      "errors": {
+        "sessionExpired": "Session expirée. Veuillez vous reconnecter.",
+        "loginFailed": "Échec de la connexion. Veuillez vérifier vos identifiants.",
+        "validationFailed": "Échec de la validation du statut administrateur",
+        "unauthorized": "Accès non autorisé"
+      },
+      "status": {
+        "validating": "Validation des identifiants...",
+        "loading": "Chargement..."
+      }
+    },
+    "dashboard": {
+      "title": "Tableau de Bord Admin",
+      "cards": {
+        "orders": {
+          "title": "Commandes",
+          "manage": "Gérer les Commandes"
+        },
+        "products": {
+          "title": "Produits",
+          "manage": "Gérer les Produits"
+        }
+      },
+      "actions": {
+        "backToDashboard": "Retour au Tableau de Bord"
+      }
+    },
+    "home": {
+      "cover": {
+        "alt": "Couverture de la Boutique",
+        "welcome": "Bienvenue dans Notre Boutique"
+      },
+      "products": {
+        "title": "Liste des Produits",
+        "currency": "DZD"
+      },
+      "status": {
+        "loading": "Chargement des produits..."
+      },
+      "errors": {
+        "fetchFailed": "Échec du chargement des produits"
+      }
+    },
+    "orderDetail": {
+      "title": "Détails de la Commande",
+      "customerInfo": {
+        "title": "Informations Client",
+        "name": "Nom",
+        "phone": "Téléphone",
+        "address": "Adresse"
+      },
+      "orderInfo": {
+        "title": "Informations de Commande",
+        "productId": "ID Produit",
+        "deliveryType": "Type de Livraison",
+        "status": "Statut",
+        "date": "Date",
+        "deliveryOptions": {
+          "home": "Livraison à Domicile",
+          "center": "Retrait au Centre"
+        },
+        "statusOptions": {
+          "pending": "En Attente",
+          "delivered": "Livré"
+        }
+      },
+      "actions": {
+        "markDelivered": "Marquer comme Livré",
+        "close": "Fermer"
+      }
+    },
+    "orderForm": {
+      "title": "Complétez Votre Commande",
+      "loading": "Chargement des détails du produit...",
+      "currency": "DZD",
+      "available": "Disponible",
+      "units": "unités",
+      "fields": {
+        "firstName": "Prénom",
+        "lastName": "Nom",
+        "phone": "Numéro de Téléphone",
+        "wilaya": "Wilaya",
+        "commune": "Commune",
+        "address": "Adresse",
+        "quantity": "Quantité"
+      },
+      "delivery": {
+        "title": "Type de Livraison",
+        "options": {
+          "home": "Livraison à Domicile",
+          "center": "Point de Livraison"
+        }
+      },
+      "summary": {
+        "title": "Résumé de la Commande",
+        "unitPrice": "Prix Unitaire",
+        "quantity": "Quantité",
+        "total": "Total"
+      },
+      "buttons": {
+        "outOfStock": "En Rupture de Stock",
+        "processing": "Traitement...",
+        "placeOrder": "Passer la Commande"
+      },
+      "errors": {
+        "maxQuantity": "Maximum {{max}} articles disponibles",
+        "allRequired": "Tous les champs sont obligatoires",
+        "outOfStock": "Ce produit est actuellement en rupture de stock",
+        "invalidQuantity": "Veuillez entrer une quantité entre 1 et {{max}}"
+      }
+    },
+    "orderList": {
+      "title": "Gestion des Commandes",
+      "noOrders": "Aucune commande trouvée",
+      "orderNumber": "Commande #{id}",
+      "product": "Produit",
+      "status": {
+        "pending": "En attente",
+        "delivered": "Livrée"
+      },
+      "actions": {
+        "details": "Détails",
+        "deliver": "Livrer"
+      },
+      "details": {
+        "title": "Détails de la Commande #{id}",
+        "customerInfo": "Informations Client",
+        "orderInfo": "Informations Commande",
+        "deliveryInfo": "Informations Livraison",
+        "locationInfo": "Informations Localisation",
+        "name": "Nom",
+        "phone": "Téléphone",
+        "date": "Date",
+        "status": "Statut",
+        "productId": "ID Produit",
+        "quantity": "Quantité",
+        "totalPrice": "Prix Total",
+        "type": "Type",
+        "deliveryTypes": {
+          "home": "Livraison à Domicile",
+          "center": "Point de Livraison"
+        },
+        "wilaya": "Wilaya",
+        "commune": "Commune",
+        "postalCode": "Code Postal",
+        "address": "Adresse"
+      }
+    },
+    "orderStatus": {
+      "success": {
+        "title": "Commande Passée avec Succès !",
+        "message": "Merci pour votre commande. Nous la traiterons prochainement.",
+        "orderId": "Commande N° #{id}",
+        "quantity": "Quantité : {{quantity}} articles",
+        "totalPrice": "Total : {{price}} {{currency}}"
+      },
+      "error": {
+        "title": "Échec de la Commande",
+        "message": "Désolé, nous n'avons pas pu traiter votre commande. Veuillez réessayer."
+      },
+      "backToHome": "Retour à l'Accueil"
+    },
+    "productCard": {
+      "price": "Prix",
+      "imageAlt": "Image du produit {{name}}",
+      "outOfStock": "En Rupture de Stock"
+    },
+    "productDetail": {
+      "loading": "Chargement des détails du produit...",
+      "error": "Erreur lors du chargement du produit",
+      "notFound": "Produit non trouvé",
+      "noImages": "Aucune image disponible",
+      "imageAlt": "Image de {{name}}",
+      "prevImage": "Image précédente",
+      "nextImage": "Image suivante",
+      "buttons": {
+        "buyNow": "Acheter Maintenant",
+        "updateProduct": "Modifier le Produit"
+      }
+    },
+    "productForm": {
+      "title": "Ajouter un Nouveau Produit",
+      "fields": {
+        "name": "Nom du Produit",
+        "description": "Description",
+        "price": "Prix",
+        "stock": "Stock Disponible",
+        "images": "Télécharger des Images:"
+      },
+      "placeholders": {
+        "name": "Entrez le nom du produit",
+        "description": "Entrez la description du produit",
+        "price": "0,00",
+        "stock": "0"
+      },
+      "buttons": {
+        "add": "Ajouter le Produit",
+        "adding": "Ajout en cours..."
+      },
+      "preview": {
+        "title": "Aperçu:",
+        "imageAlt": "Aperçu {{number}}"
+      },
+      "messages": {
+        "success": "Produit ajouté avec succès!",
+        "error": {
+          "failed": "Échec de l'ajout du produit",
+          "validation": "Veuillez remplir tous les champs requis"
+        }
+      }
+    },
+    "productList": {
+      "title": "Gestion des Produits",
+      "table": {
+        "id": "ID",
+        "name": "Nom",
+        "price": "Prix ({{currency}})",
+        "stock": "Stock",
+        "actions": "Actions"
+      },
+      "actions": {
+        "edit": "Modifier le produit",
+        "delete": "Supprimer le produit"
+      },
+      "edit": {
+        "title": "Modifier le Produit",
+        "name": "Nom du Produit",
+        "price": "Prix",
+        "stock": "Stock Disponible",
+        "description": "Description"
+      },
+      "messages": {
+        "updateSuccess": "Produit mis à jour avec succès",
+        "updateError": "Échec de la mise à jour du produit",
+        "deleteSuccess": "Produit supprimé avec succès",
+        "deleteError": "Échec de la suppression du produit",
+        "fetchError": "Échec du chargement des produits"
+      }
+    },
+    "productUpdate": {
+      "loading": "Chargement des détails du produit...",
+      "notFound": "Produit non trouvé",
+      "backToProduct": "Retour au Produit",
+      "title": "Modifier le Produit",
+      "fields": {
+        "name": "Nom du Produit",
+        "description": "Description",
+        "price": "Prix ({{currency}})"
+      },
+      "buttons": {
+        "update": "Mettre à jour les Détails",
+        "updating": "Mise à jour...",
+        "delete": "Supprimer le Produit"
+      },
+      "images": {
+        "title": "Images du Produit",
+        "alt": "Image de {{name}}",
+        "deleteAria": "Supprimer l'image",
+        "choose": "Choisir de Nouvelles Images",
+        "upload": "Télécharger",
+        "uploading": "Téléchargement..."
+      },
+      "messages": {
+        "updateSuccess": "Produit mis à jour avec succès !",
+        "deleteSuccess": "Produit supprimé avec succès !",
+        "imageDeleteSuccess": "Image supprimée avec succès !",
+        "imageUploadSuccess": "Images téléchargées avec succès !",
+        "selectImages": "Veuillez sélectionner des images à télécharger",
+        "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce produit ?",
+        "deleteImageConfirm": "Êtes-vous sûr de vouloir supprimer cette image ?"
+      }
+    }
+}

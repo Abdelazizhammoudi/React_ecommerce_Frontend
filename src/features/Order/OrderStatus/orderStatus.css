@@ -40,3 +40,20 @@
   .back-button:hover {
     background: #2980b9;
   }
+
+[dir="rtl"] .order-status-container {
+  text-align: right;
+}
+
+[dir="rtl"] .status-message {
+  direction: rtl;
+}
+
+[dir="rtl"] .order-summary {
+  text-align: right;
+}
+
+[dir="rtl"] .back-button {
+  margin-right: 0;
+  margin-left: auto;
+}

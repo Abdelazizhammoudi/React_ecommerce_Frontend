@@ -1,13 +1,13 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { BASE_URL } from '@/config/constants';
+import { useTranslation } from 'react-i18next';
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  
-  //The admin state is initialized from localStorage when the app loads: 
-    const [admin, setAdmin] = useState(() => {
+  const { t } = useTranslation();
+  const [admin, setAdmin] = useState(() => {
     const token = localStorage.getItem('adminToken');
     return token ? { isAdmin: true, verified: true } : null; // Rehydrate admin state if token exists
   });
@@ -52,7 +52,7 @@ export const AuthProvider = ({ children }) => {
       error => {
         if (error.response?.status === 401) {
           logout();
-          setError('Session expired. Please login again.');
+          setError(t('auth.errors.sessionExpired'));
         }
         return Promise.reject(error);
       }
@@ -61,7 +61,7 @@ export const AuthProvider = ({ children }) => {
     return () => {
       axios.interceptors.response.eject(interceptor);
     };
-  }, []);
+  }, [t]);
 
   // Initial validation
   useEffect(() => {
@@ -79,7 +79,7 @@ export const AuthProvider = ({ children }) => {
       return true;
     } catch (error) {
       console.error('Login failed:', error);
-      setError(error.response?.data?.message || 'Login failed. Please check your credentials.');
+      setError(error.response?.data?.message || t('auth.errors.loginFailed'));
       return false;
     } finally {
       setLoading(false);

@@ -1,4 +1,7 @@
 import React from "react";
+import { withTranslation } from 'react-i18next';
+import "@/styles/global.css";
+import "./ErrorBoundary.css";
 
 class ErrorBoundary extends React.Component {
   constructor(props) {
@@ -15,11 +18,17 @@ class ErrorBoundary extends React.Component {
   }
 
   render() {
+    const { t } = this.props;
+
     if (this.state.hasError) {
-      return <div className="error">Something went wrong. Please try again later.</div>;
+      return (
+        <div className="error">
+          {t('error.boundary.message')}
+        </div>
+      );
     }
     return this.props.children;
   }
 }
 
-export default ErrorBoundary;
+export default withTranslation()(ErrorBoundary);

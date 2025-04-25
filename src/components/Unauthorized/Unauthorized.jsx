@@ -1,31 +1,31 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import './Unauthorized.css';
 
 const Unauthorized = () => {
   const location = useLocation();
   const { from, reason } = location.state || {};
+  const { t } = useTranslation();
 
   return (
     <div className="unauthorized-container">
-      <h1>403 - Access Denied</h1>
+      <h1>{t('unauthorized.title')}</h1>
       <p>
-        {reason || 'You do not have the necessary permissions to view this page.'}
+        {reason || t('unauthorized.defaultMessage')}
       </p>
       {from && (
         <p>
-          You tried to access: <code>{from.pathname}</code>
+          {t('unauthorized.attemptedAccess')} <code>{from.pathname}</code>
         </p>
       )}
-      <p>
-        If you believe this is a mistake, please contact the administrator or try logging in again.
-      </p>
+      <p>{t('unauthorized.contactAdmin')}</p>
       <div className="action-buttons">
         <a href="/admin/login" className="login-link">
-          Go to Login
+          {t('unauthorized.loginButton')}
         </a>
         <a href="/" className="home-link">
-          Return to Home
+          {t('unauthorized.homeButton')}
         </a>
       </div>
     </div>

@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import { ProductService } from "@/services/productService";
 import useFetch from "@/hooks/useFetch";
 import useImageUpload from "@/hooks/useImageUpload";
 import Button from "@mui/material/Button";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import CloseIcon from "@mui/icons-material/Close"; // Import Close icon
+import CloseIcon from "@mui/icons-material/Close";
 import "@/styles/global.css";
 import "./product-update.css";
 
 function ProductUpdate() {
+  const { t } = useTranslation();
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: product, loading, error, setData: setProduct } = useFetch(`/product/${id}/`);
@@ -45,7 +47,7 @@ function ProductUpdate() {
     try {
       const updatedProduct = await ProductService.update(id, formData);
       setProduct(updatedProduct);
-      alert("Product updated successfully!");
+      alert(t('productUpdate.success'));
     } catch (err) {
       setErrorMessage(err.message);
     } finally {
@@ -56,7 +58,7 @@ function ProductUpdate() {
   // Handle image upload
   const handleUploadImages = async () => {
     if (newImages.length === 0) {
-      alert("Please select images to upload");
+      alert(t('productUpdate.images.noImages'));
       return;
     }
 
@@ -67,7 +69,7 @@ function ProductUpdate() {
         images: [...prev.images, ...uploadedImages],
       }));
       setNewImages([]);
-      alert("Images uploaded successfully!");
+      alert(t('productUpdate.images.success'));
     } catch (err) {
       setErrorMessage(err.message);
     }
@@ -75,14 +77,14 @@ function ProductUpdate() {
 
   // Handle image deletion
   const handleDeleteImage = async (imageId) => {
-    if (window.confirm("Are you sure you want to delete this image?")) {
+    if (window.confirm(t('productUpdate.images.confirmDelete'))) {
       try {
         await ProductService.deleteImage(imageId);
         setProduct((prev) => ({
           ...prev,
           images: prev.images.filter((image) => image.id !== imageId),
         }));
-        alert("Image deleted successfully!");
+        alert(t('productUpdate.images.deleted'));
       } catch (err) {
         setErrorMessage(err.message);
       }
@@ -91,33 +93,32 @@ function ProductUpdate() {
 
   // Handle product deletion
   const handleDeleteProduct = async () => {
-    if (window.confirm("Are you sure you want to delete this product?")) {
+    if (window.confirm(t('productUpdate.confirmDelete'))) {
       try {
         await ProductService.deleteProduct(id);
-        alert("Product deleted successfully!");
-        navigate("/products"); // Redirect to product list
+        alert(t('productUpdate.deleted'));
+        navigate("/products");
       } catch (err) {
         setErrorMessage(err.message);
       }
     }
   };
 
-  if (loading) return <div className="loading">Loading product details...</div>;
-  if (error) return <div className="error">{error}</div>;
-  if (!product) return <div className="error">Product not found</div>;
+  if (loading) return <div className="loading">{t('productUpdate.loading')}</div>;
+  if (error) return <div className="error">{t(error)}</div>;
+  if (!product) return <div className="error">{t('productUpdate.notFound')}</div>;
 
   return (
     <div className="product-update-container">
-      {/* Back Link */}
       <Link to={`/product/${id}`} className="back-link">
-        &larr; Back to Product
+        &larr; {t('productUpdate.backToProduct')}
       </Link>
 
-      <h2>Edit Product</h2>
+      <h2>{t('productUpdate.title')}</h2>
 
       <form onSubmit={handleSubmit} className="product-form">
         <div className="form-group">
-          <label>Product Name:</label>
+          <label>{t('productUpdate.fields.name')}:</label>
           <input
             type="text"
             name="name"
@@ -128,7 +129,7 @@ function ProductUpdate() {
         </div>
 
         <div className="form-group">
-          <label>Description:</label>
+          <label>{t('productUpdate.fields.description')}:</label>
           <textarea
             name="description"
             value={formData.description}
@@ -138,7 +139,7 @@ function ProductUpdate() {
         </div>
 
         <div className="form-group">
-          <label>Price (DZD):</label>
+          <label>{t('productUpdate.fields.price', { currency: t('common.currency') })}:</label>
           <input
             type="number"
             step="0.01"
@@ -151,23 +152,24 @@ function ProductUpdate() {
         </div>
 
         <button type="submit" className="primary-button" disabled={isUpdating}>
-          {isUpdating ? "Updating..." : "Update Product Details"}
+          {isUpdating ? t('productUpdate.buttons.updating') : t('productUpdate.buttons.update')}
         </button>
       </form>
 
       <div className="image-section">
-        <h3>Product Images</h3>
+        <h3>{t('productUpdate.images.title')}</h3>
         <div className="product-images-update">
           {product.images.map((image) => (
             <div key={image.id} className="image-container-update">
               <img
                 src={image.image}
-                alt={`${product.name}`}
+                alt={t('productUpdate.images.alt', { name: product.name })}
                 className="product-image-update"
               />
               <button
                 className="delete-image-button"
                 onClick={() => handleDeleteImage(image.id)}
+                aria-label={t('productUpdate.images.deleteAria')}
               >
                 <CloseIcon fontSize="small" />
               </button>
@@ -185,7 +187,7 @@ function ProductUpdate() {
             style={{ display: "none" }}
           />
           <label htmlFor="image-upload" className="upload-button">
-            Choose New Images
+            {t('productUpdate.images.choose')}
           </label>
 
           {newImages.length > 0 && (
@@ -196,13 +198,12 @@ function ProductUpdate() {
               onClick={handleUploadImages}
               disabled={isUploading}
             >
-              {isUploading ? "Uploading..." : "Upload "}
+              {isUploading ? t('productUpdate.images.uploading') : t('productUpdate.images.upload')}
             </Button>
           )}
         </div>
       </div>
 
-      {/* Delete Product Button */}
       <Button
         className="delete-product-button"
         variant="contained"
@@ -211,12 +212,12 @@ function ProductUpdate() {
         onClick={handleDeleteProduct}
         style={{ marginTop: "2rem" }}
       >
-        Delete Product
+        {t('productUpdate.buttons.delete')}
       </Button>
 
       {(errorMessage || uploadError) && (
         <div className="error-message">
-          {errorMessage || uploadError}
+          {t(errorMessage || uploadError)}
         </div>
       )}
     </div>

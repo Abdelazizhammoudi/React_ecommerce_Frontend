@@ -1,14 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import "@/styles/global.css";
-import "./not-found.css"; // Component-specific styles
+import "./not-found.css";
 
 function NotFound() {
+  const { t } = useTranslation();
+
   return (
     <div className="not-found-container">
-      <h1>404 - Page Not Found</h1>
-      <p>Oops! The page you're looking for doesn't exist.</p>
-      <Link to="/" className="primary-button">Go Home</Link>
+      <h1>{t('notFound.title')}</h1>
+      <p>{t('notFound.message')}</p>
+      <Link to="/" className="primary-button">
+        {t('notFound.goHome')}
+      </Link>
     </div>
   );
 }

@@ -1,0 +1,321 @@
+{
+    "nav": {
+      "home": "الرئيسية",
+      "products": "المنتجات",
+      "cart": "السلة",
+      "dashboard": "لوحة التحكم",
+      "login": "تسجيل الدخول",
+      "logout": "تسجيل الخروج",
+      "addProduct": "إضافة منتج",
+      "logoAlt": "شعار المتجر"
+    },
+    "footer": {
+      "rights": "© 2025 متجري. جميع الحقوق محفوظة.",
+      "madeBy": "صنع بـ ❤️ بواسطة عبد العزيز حمودي",
+      "admin": "المشرف"
+    },
+    "admin": {
+      "login": {
+        "title": "تسجيل دخول المشرف",
+        "username": "اسم المستخدم",
+        "password": "كلمة المرور",
+        "submit": "تسجيل الدخول"
+      },
+      "route": {
+        "verifying": "...جاري التحقق من الصلاحيات",
+        "missingToken": "رمز المصادقة مفقود",
+        "adminRequired": "صلاحيات المشرف مطلوبة"
+      }
+    },
+    "notFound": {
+      "title": "404 - الصفحة غير موجودة",
+      "message": "عذراً! الصفحة التي تبحث عنها غير موجودة.",
+      "goHome": "العودة للرئيسية"
+    },
+    "unauthorized": {
+      "title": "403 - تم رفض الوصول",
+      "defaultMessage": "ليس لديك الصلاحيات اللازمة لعرض هذه الصفحة.",
+      "attemptedAccess": "حاولت الوصول إلى:",
+      "contactAdmin": "إذا كنت تعتقد أن هذا خطأ، يرجى الاتصال بالمسؤول أو محاولة تسجيل الدخول مرة أخرى.",
+      "loginButton": "الذهاب لتسجيل الدخول",
+      "homeButton": "العودة للرئيسية"
+    },
+    "error": {
+      "boundary": {
+        "message": ".حدث خطأ ما. يرجى المحاولة مرة أخرى لاحقاً"
+      }
+    },
+    "auth": {
+      "errors": {
+        "sessionExpired": ".انتهت الجلسة. يرجى تسجيل الدخول مرة أخرى",
+        "loginFailed": ".فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد",
+        "validationFailed": "فشل التحقق من حالة المشرف",
+        "unauthorized": "وصول غير مصرح به"
+      },
+      "status": {
+        "validating": "...جاري التحقق من البيانات",
+        "loading": "...جاري التحميل"
+      }
+    },
+    "dashboard": {
+      "title": "لوحة تحكم المشرف",
+      "cards": {
+        "orders": {
+          "title": "الطلبات",
+          "manage": "إدارة الطلبات"
+        },
+        "products": {
+          "title": "المنتجات",
+          "manage": "إدارة المنتجات"
+        }
+      },
+      "actions": {
+        "backToDashboard": "العودة إلى لوحة التحكم"
+      }
+    },
+    "home": {
+      "cover": {
+        "alt": "صورة المتجر",
+        "welcome": "مرحباً بكم في متجرنا"
+      },
+      "products": {
+        "title": "قائمة المنتجات",
+        "currency": "دج"
+      },
+      "status": {
+        "loading": "...جاري تحميل المنتجات"
+      },
+      "errors": {
+        "fetchFailed": "فشل في تحميل المنتجات"
+      }
+    },
+    "orderDetail": {
+      "title": "تفاصيل الطلب",
+      "customerInfo": {
+        "title": "معلومات العميل",
+        "name": "الاسم",
+        "phone": "الهاتف",
+        "address": "العنوان"
+      },
+      "orderInfo": {
+        "title": "معلومات الطلب",
+        "productId": "رقم المنتج",
+        "deliveryType": "نوع التوصيل",
+        "status": "الحالة",
+        "date": "التاريخ",
+        "deliveryOptions": {
+          "home": "توصيل منزلي",
+          "center": "استلام من المركز"
+        },
+        "statusOptions": {
+          "pending": "قيد الانتظار",
+          "delivered": "تم التوصيل"
+        }
+      },
+      "actions": {
+        "markDelivered": "تحديد كتم التوصيل",
+        "close": "إغلاق"
+      }
+    },
+    "orderForm": {
+      "title": "إكمال طلبك",
+      "loading": "...جاري تحميل تفاصيل المنتج",
+      "currency": "دج",
+      "available": "متوفر",
+      "units": "وحدات",
+      "fields": {
+        "firstName": "الاسم الأول",
+        "lastName": "اسم العائلة",
+        "phone": "رقم الهاتف",
+        "wilaya": "الولاية",
+        "commune": "البلدية",
+        "address": "العنوان",
+        "quantity": "الكمية"
+      },
+      "delivery": {
+        "title": "نوع التوصيل",
+        "options": {
+          "home": "توصيل منزلي",
+          "center": "مركز التوصيل"
+        }
+      },
+      "summary": {
+        "title": "ملخص الطلب",
+        "unitPrice": "سعر الوحدة",
+        "quantity": "الكمية",
+        "total": "المجموع"
+      },
+      "buttons": {
+        "outOfStock": "نفذ من المخزون",
+        "processing": "...جاري المعالجة",
+        "placeOrder": "تأكيد الطلب"
+      },
+      "errors": {
+        "maxQuantity": "الحد الأقصى {{max}} وحدات متوفرة",
+        "allRequired": "جميع الحقول مطلوبة",
+        "outOfStock": "هذا المنتج غير متوفر حالياً",
+        "invalidQuantity": "الرجاء إدخال كمية بين 1 و {{max}}"
+      }
+    },
+    "orderList": {
+      "title": "إدارة الطلبات",
+      "noOrders": "لا توجد طلبات",
+      "orderNumber": "طلب رقم {id}#",
+      "product": "المنتج",
+      "status": {
+        "pending": "قيد الانتظار",
+        "delivered": "تم التوصيل"
+      },
+      "actions": {
+        "details": "التفاصيل",
+        "deliver": "تسليم"
+      },
+      "details": {
+        "title": "تفاصيل الطلب رقم {id}#",
+        "customerInfo": "معلومات العميل",
+        "orderInfo": "معلومات الطلب",
+        "deliveryInfo": "معلومات التوصيل",
+        "locationInfo": "معلومات الموقع",
+        "name": "الاسم",
+        "phone": "الهاتف",
+        "date": "التاريخ",
+        "status": "الحالة",
+        "productId": "رقم المنتج",
+        "quantity": "الكمية",
+        "totalPrice": "السعر الإجمالي",
+        "type": "النوع",
+        "deliveryTypes": {
+          "home": "توصيل منزلي",
+          "center": "مركز التوصيل"
+        },
+        "wilaya": "الولاية",
+        "commune": "البلدية",
+        "postalCode": "الرمز البريدي",
+        "address": "العنوان"
+      }
+    },
+    "orderStatus": {
+      "success": {
+        "title": "!تم تقديم الطلب بنجاح",
+        "message": ".شكراً لطلبك. سنقوم بمعالجته قريباً",
+        "orderId": "رقم الطلب: #{id}",
+        "quantity": "الكمية: {{quantity}} قطعة",
+        "totalPrice": "المجموع: {{price}} {{currency}}"
+      },
+      "error": {
+        "title": "فشل الطلب",
+        "message": ".عذراً، لم نتمكن من معالجة طلبك. يرجى المحاولة مرة أخرى"
+      },
+      "backToHome": "العودة للرئيسية"
+    },
+    "productCard": {
+      "price": "السعر",
+      "imageAlt": "صورة المنتج {{name}}",
+      "outOfStock": "نفذ من المخزن"
+    },
+    "productDetail": {
+      "loading": "...جاري تحميل تفاصيل المنتج",
+      "error": "خطأ في تحميل المنتج",
+      "notFound": "المنتج غير موجود",
+      "noImages": "لا توجد صور متاحة",
+      "imageAlt": "صورة {{name}}",
+      "prevImage": "الصورة السابقة",
+      "nextImage": "الصورة التالية",
+      "buttons": {
+        "buyNow": "اشتري الآن",
+        "updateProduct": "تحديث المنتج"
+      }
+    },
+    "productForm": {
+      "title": "إضافة منتج جديد",
+      "fields": {
+        "name": "اسم المنتج",
+        "description": "الوصف",
+        "price": "السعر",
+        "stock": "المخزون المتاح",
+        "images": "تحميل الصور:"
+      },
+      "placeholders": {
+        "name": "أدخل اسم المنتج",
+        "description": "أدخل وصف المنتج",
+        "price": "0.00",
+        "stock": "0"
+      },
+      "buttons": {
+        "add": "إضافة المنتج",
+        "adding": "...جاري الإضافة"
+      },
+      "preview": {
+        "title": "معاينة:",
+        "imageAlt": "معاينة {{number}}"
+      },
+      "messages": {
+        "success": "!تمت إضافة المنتج بنجاح",
+        "error": {
+          "failed": "فشل في إضافة المنتج",
+          "validation": "يرجى ملء جميع الحقول المطلوبة"
+        }
+      }
+    },
+    "productList": {
+      "title": "إدارة المنتجات",
+      "table": {
+        "id": "المعرف",
+        "name": "الاسم",
+        "price": "السعر ({{currency}})",
+        "stock": "المخزون",
+        "actions": "الإجراءات"
+      },
+      "actions": {
+        "edit": "تعديل المنتج",
+        "delete": "حذف المنتج"
+      },
+      "edit": {
+        "title": "تعديل المنتج",
+        "name": "اسم المنتج",
+        "price": "السعر",
+        "stock": "المخزون المتاح",
+        "description": "الوصف"
+      },
+      "messages": {
+        "updateSuccess": "تم تحديث المنتج بنجاح",
+        "updateError": "فشل تحديث المنتج",
+        "deleteSuccess": "تم حذف المنتج بنجاح",
+        "deleteError": "فشل حذف المنتج",
+        "fetchError": "فشل في تحميل المنتجات"
+      }
+    },
+    "productUpdate": {
+      "loading": "...جاري تحميل تفاصيل المنتج",
+      "notFound": "المنتج غير موجود",
+      "backToProduct": "العودة إلى المنتج",
+      "title": "تعديل المنتج",
+      "fields": {
+        "name": "اسم المنتج",
+        "description": "الوصف",
+        "price": "السعر ({{currency}})"
+      },
+      "buttons": {
+        "update": "تحديث تفاصيل المنتج",
+        "updating": "...جاري التحديث",
+        "delete": "حذف المنتج"
+      },
+      "images": {
+        "title": "صور المنتج",
+        "alt": "صورة {{name}}",
+        "deleteAria": "حذف الصورة",
+        "choose": "اختيار صور جديدة",
+        "upload": "رفع",
+        "uploading": "...جاري الرفع"
+      },
+      "messages": {
+        "updateSuccess": "!تم تحديث المنتج بنجاح",
+        "deleteSuccess": "!تم حذف المنتج بنجاح",
+        "imageDeleteSuccess": "!تم حذف الصورة بنجاح",
+        "imageUploadSuccess": "!تم رفع الصور بنجاح",
+        "selectImages": "الرجاء اختيار صور للرفع",
+        "deleteConfirm": "هل أنت متأكد من حذف هذا المنتج؟",
+        "deleteImageConfirm": "هل أنت متأكد من حذف هذه الصورة؟"
+      }
+    }
+  }

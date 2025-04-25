@@ -48,3 +48,16 @@
 .product-texts-container p {
   margin: var(--space-sm) 0;
 }
+
+[dir="rtl"] .product-card {
+  text-align: right;
+}
+
+[dir="rtl"] .product-texts-container {
+  direction: rtl;
+}
+
+[dir="rtl"] .product-texts-container p strong {
+  margin-left: 5px;
+  margin-right: 0;
+}

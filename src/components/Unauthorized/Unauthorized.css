@@ -66,3 +66,21 @@
 .action-buttons .home-link:hover {
   background-color: #cc0000; /* Slightly darker shade for hover */
 }
+
+[dir="rtl"] .unauthorized-container {
+  text-align: right;
+}
+
+[dir="rtl"] .action-buttons {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .login-link {
+  margin-left: 10px;
+  margin-right: 0;
+}
+
+[dir="rtl"] code {
+  direction: ltr;
+  display: inline-block;
+}

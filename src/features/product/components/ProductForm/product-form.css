@@ -48,3 +48,25 @@
     border-radius: 4px;
     margin-top: var(--space-md);
   }
+
+  [dir="rtl"] .product-form-container {
+    text-align: right;
+  }
+  
+  [dir="rtl"] .form-group {
+    direction: rtl;
+  }
+  
+  [dir="rtl"] .form-group label {
+    margin-left: 10px;
+    margin-right: 0;
+  }
+  
+  [dir="rtl"] .preview-images {
+    flex-direction: row-reverse;
+  }
+  
+  [dir="rtl"] .error-message,
+  [dir="rtl"] .success-message {
+    text-align: right;
+  }

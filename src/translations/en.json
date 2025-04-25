@@ -1,0 +1,321 @@
+{
+    "nav": {
+      "home": "Home",
+      "products": "Products",
+      "cart": "Cart",
+      "dashboard": "Dashboard",
+      "login": "Login",
+      "logout": "Logout",
+      "addProduct": "Add Product",
+      "logoAlt": "Shop Logo"
+    },
+    "footer": {
+      "rights": "© 2025 My Shop. All rights reserved.",
+      "madeBy": "Made with ❤️ by Abdelaziz HAMMOUDI",
+      "admin": "Admin"
+    },
+    "admin": {
+      "login": {
+        "title": "Admin Login",
+        "username": "Username",
+        "password": "Password",
+        "submit": "Login"
+      },
+      "route": {
+        "verifying": "Verifying permissions...",
+        "missingToken": "Missing authentication token",
+        "adminRequired": "Admin privileges required"
+      }
+    },
+    "notFound": {
+      "title": "404 - Page Not Found",
+      "message": "Oops! The page you're looking for doesn't exist.",
+      "goHome": "Go Home"
+    },
+    "unauthorized": {
+      "title": "403 - Access Denied",
+      "defaultMessage": "You do not have the necessary permissions to view this page.",
+      "attemptedAccess": "You tried to access:",
+      "contactAdmin": "If you believe this is a mistake, please contact the administrator or try logging in again.",
+      "loginButton": "Go to Login",
+      "homeButton": "Return to Home"
+    },
+    "error": {
+      "boundary": {
+        "message": "Something went wrong. Please try again later."
+      }
+    },
+    "auth": {
+      "errors": {
+        "sessionExpired": "Session expired. Please login again.",
+        "loginFailed": "Login failed. Please check your credentials.",
+        "validationFailed": "Failed to validate admin status",
+        "unauthorized": "Unauthorized access"
+      },
+      "status": {
+        "validating": "Validating credentials...",
+        "loading": "Loading..."
+      }
+    },
+    "dashboard": {
+      "title": "Admin Dashboard",
+      "cards": {
+        "orders": {
+          "title": "Orders",
+          "manage": "Manage Orders"
+        },
+        "products": {
+          "title": "Products",
+          "manage": "Manage Products"
+        }
+      },
+      "actions": {
+        "backToDashboard": "Back to Dashboard"
+      }
+    },
+    "home": {
+      "cover": {
+        "alt": "Shop Cover",
+        "welcome": "Welcome to Our Shop"
+      },
+      "products": {
+        "title": "Product List",
+        "currency": "DZD"
+      },
+      "status": {
+        "loading": "Loading products..."
+      },
+      "errors": {
+        "fetchFailed": "Failed to fetch products"
+      }
+    },
+    "orderDetail": {
+      "title": "Order Details",
+      "customerInfo": {
+        "title": "Customer Information",
+        "name": "Name",
+        "phone": "Phone",
+        "address": "Address"
+      },
+      "orderInfo": {
+        "title": "Order Information",
+        "productId": "Product ID",
+        "deliveryType": "Delivery Type",
+        "status": "Status",
+        "date": "Date",
+        "deliveryOptions": {
+          "home": "Home Delivery",
+          "center": "Center Pickup"
+        },
+        "statusOptions": {
+          "pending": "Pending",
+          "delivered": "Delivered"
+        }
+      },
+      "actions": {
+        "markDelivered": "Mark as Delivered",
+        "close": "Close"
+      }
+    },
+    "orderForm": {
+      "title": "Complete Your Order",
+      "loading": "Loading product details...",
+      "currency": "DZD",
+      "available": "Available",
+      "units": "units",
+      "fields": {
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "phone": "Phone Number",
+        "wilaya": "Wilaya",
+        "commune": "Commune",
+        "address": "Address",
+        "quantity": "Quantity"
+      },
+      "delivery": {
+        "title": "Delivery Type",
+        "options": {
+          "home": "Home Delivery",
+          "center": "Delivery Center"
+        }
+      },
+      "summary": {
+        "title": "Order Summary",
+        "unitPrice": "Unit Price",
+        "quantity": "Quantity",
+        "total": "Total"
+      },
+      "buttons": {
+        "outOfStock": "Out of Stock",
+        "processing": "Processing...",
+        "placeOrder": "Place Order"
+      },
+      "errors": {
+        "maxQuantity": "Maximum {{max}} items available",
+        "allRequired": "All fields are required",
+        "outOfStock": "This product is currently out of stock",
+        "invalidQuantity": "Please enter a quantity between 1 and {{max}}"
+      }
+    },
+    "orderList": {
+      "title": "Orders Management",
+      "noOrders": "No orders found",
+      "orderNumber": "Order #{id}",
+      "product": "Product",
+      "status": {
+        "pending": "Pending",
+        "delivered": "Delivered"
+      },
+      "actions": {
+        "details": "Details",
+        "deliver": "Deliver"
+      },
+      "details": {
+        "title": "Order Details #{id}",
+        "customerInfo": "Customer Information",
+        "orderInfo": "Order Information",
+        "deliveryInfo": "Delivery Information",
+        "locationInfo": "Location Information",
+        "name": "Name",
+        "phone": "Phone",
+        "date": "Date",
+        "status": "Status",
+        "productId": "Product ID",
+        "quantity": "Quantity",
+        "totalPrice": "Total Price",
+        "type": "Type",
+        "deliveryTypes": {
+          "home": "Home Delivery",
+          "center": "Delivery Center"
+        },
+        "wilaya": "Wilaya",
+        "commune": "Commune",
+        "postalCode": "Postal Code",
+        "address": "Address"
+      }
+    },
+    "orderStatus": {
+      "success": {
+        "title": "Order Placed Successfully!",
+        "message": "Thank you for your order. We will process it shortly.",
+        "orderId": "Order ID: #{id}",
+        "quantity": "Quantity: {{quantity}} items",
+        "totalPrice": "Total: {{price}} {{currency}}"
+      },
+      "error": {
+        "title": "Order Failed",
+        "message": "Sorry, we couldn't process your order. Please try again."
+      },
+      "backToHome": "Back to Home"
+    },
+    "productCard": {
+      "price": "Price",
+      "imageAlt": "Product image of {{name}}",
+      "outOfStock": "Out of Stock"
+    },
+    "productDetail": {
+      "loading": "Loading product details...",
+      "error": "Error loading product",
+      "notFound": "Product not found",
+      "noImages": "No images available",
+      "imageAlt": "Image of {{name}}",
+      "prevImage": "Previous image",
+      "nextImage": "Next image",
+      "buttons": {
+        "buyNow": "Buy Now",
+        "updateProduct": "Update Product"
+      }
+    },
+    "productForm": {
+      "title": "Add New Product",
+      "fields": {
+        "name": "Product Name",
+        "description": "Description",
+        "price": "Price",
+        "stock": "Available Stock",
+        "images": "Upload Images:"
+      },
+      "placeholders": {
+        "name": "Enter product name",
+        "description": "Enter product description",
+        "price": "0.00",
+        "stock": "0"
+      },
+      "buttons": {
+        "add": "Add Product",
+        "adding": "Adding..."
+      },
+      "preview": {
+        "title": "Preview:",
+        "imageAlt": "Preview {{number}}"
+      },
+      "messages": {
+        "success": "Product added successfully!",
+        "error": {
+          "failed": "Failed to add product",
+          "validation": "Please fill all required fields"
+        }
+      }
+    },
+    "productList": {
+      "title": "Products Management",
+      "table": {
+        "id": "ID",
+        "name": "Name",
+        "price": "Price ({{currency}})",
+        "stock": "Stock",
+        "actions": "Actions"
+      },
+      "actions": {
+        "edit": "Edit product",
+        "delete": "Delete product"
+      },
+      "edit": {
+        "title": "Edit Product",
+        "name": "Product Name",
+        "price": "Price",
+        "stock": "Available Stock",
+        "description": "Description"
+      },
+      "messages": {
+        "updateSuccess": "Product updated successfully",
+        "updateError": "Failed to update product",
+        "deleteSuccess": "Product deleted successfully",
+        "deleteError": "Failed to delete product",
+        "fetchError": "Failed to fetch products"
+      }
+    },
+    "productUpdate": {
+      "loading": "Loading product details...",
+      "notFound": "Product not found",
+      "backToProduct": "Back to Product",
+      "title": "Edit Product",
+      "fields": {
+        "name": "Product Name",
+        "description": "Description",
+        "price": "Price ({{currency}})"
+      },
+      "buttons": {
+        "update": "Update Product Details",
+        "updating": "Updating...",
+        "delete": "Delete Product"
+      },
+      "images": {
+        "title": "Product Images",
+        "alt": "Image of {{name}}",
+        "deleteAria": "Delete image",
+        "choose": "Choose New Images",
+        "upload": "Upload",
+        "uploading": "Uploading..."
+      },
+      "messages": {
+        "updateSuccess": "Product updated successfully!",
+        "deleteSuccess": "Product deleted successfully!",
+        "imageDeleteSuccess": "Image deleted successfully!",
+        "imageUploadSuccess": "Images uploaded successfully!",
+        "selectImages": "Please select images to upload",
+        "deleteConfirm": "Are you sure you want to delete this product?",
+        "deleteImageConfirm": "Are you sure you want to delete this image?"
+      }
+    }
+}

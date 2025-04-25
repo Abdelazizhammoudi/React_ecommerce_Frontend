@@ -18,3 +18,12 @@
     color: var(--text-dark);
     margin: var(--space-sm) 0;
   }
+
+  [dir="rtl"] .not-found-container {
+    text-align: right;
+  }
+  
+  [dir="rtl"] .primary-button {
+    margin-right: 0;
+    margin-left: 8px;
+  }

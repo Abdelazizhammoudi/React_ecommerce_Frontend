@@ -8,8 +8,10 @@ import { Edit, Delete } from '@mui/icons-material';
 import axios from 'axios';
 import { BASE_URL } from '@/config/constants';
 import { ProductService } from '@/services/productService';
+import { useTranslation } from 'react-i18next';
 
 const ProductsList = () => {
+    const { t } = useTranslation();
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
@@ -104,22 +106,22 @@ const ProductsList = () => {
     };
 
     if (loading) return <CircularProgress sx={{ display: 'block', mx: 'auto', mt: 4 }} />;
-    if (error) return <Alert severity="error" sx={{ m: 2 }}>{error}</Alert>;
+    if (error) return <Alert severity="error" sx={{ m: 2 }}>{t(error)}</Alert>;
 
     return (
         <Box sx={{ p: 3 }}>
-            <Typography variant="h4" gutterBottom>Products Management</Typography>
-            {success && <Alert severity="success" sx={{ mb: 2 }}>{success}</Alert>}
+            <Typography variant="h4" gutterBottom>{t('productList.title')}</Typography>
+            {success && <Alert severity="success" sx={{ mb: 2 }}>{t(success)}</Alert>}
             
             <TableContainer component={Paper} elevation={3}>
                 <Table>
                     <TableHead>
                         <TableRow>
-                            <TableCell>ID</TableCell>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Price (DZD)</TableCell>
-                            <TableCell>Stock</TableCell>
-                            <TableCell>Actions</TableCell>
+                            <TableCell>{t('productList.table.id')}</TableCell>
+                            <TableCell>{t('productList.table.name')}</TableCell>
+                            <TableCell>{t('productList.table.price', { currency: t('common.currency') })}</TableCell>
+                            <TableCell>{t('productList.table.stock')}</TableCell>
+                            <TableCell>{t('productList.table.actions')}</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -133,12 +135,14 @@ const ProductsList = () => {
                                     <IconButton 
                                         color="primary"
                                         onClick={() => handleEditClick(product)}
+                                        aria-label={t('productList.actions.edit')}
                                     >
                                         <Edit />
                                     </IconButton>
                                     <IconButton 
                                         color="error"
                                         onClick={() => handleDelete(product.id)}
+                                        aria-label={t('productList.actions.delete')}
                                     >
                                         <Delete />
                                     </IconButton>
@@ -150,11 +154,11 @@ const ProductsList = () => {
             </TableContainer>
 
             <Dialog open={!!editProduct} onClose={() => setEditProduct(null)}>
-                <DialogTitle>Edit Product</DialogTitle>
+                <DialogTitle>{t('productList.edit.title')}</DialogTitle>
                 <DialogContent>
                     <TextField
                         margin="dense"
-                        label="Product Name"
+                        label={t('productList.edit.name')}
                         fullWidth
                         value={editedData.name}
                         onChange={(e) => setEditedData(prev => ({
@@ -164,7 +168,7 @@ const ProductsList = () => {
                     />
                     <TextField
                         margin="dense"
-                        label="Price (DZD)"
+                        label={t('productList.edit.price')}
                         type="number"
                         fullWidth
                         value={editedData.price}
@@ -175,7 +179,7 @@ const ProductsList = () => {
                     />
                     <TextField
                         margin="dense"
-                        label="Available Stock"
+                        label={t('productList.edit.stock')}
                         type="number"
                         fullWidth
                         value={editedData.available_stock}
@@ -186,7 +190,7 @@ const ProductsList = () => {
                     />
                     <TextField
                         margin="dense"
-                        label="Description"
+                        label={t('productList.edit.description')}
                         fullWidth
                         multiline
                         rows={4}
@@ -198,13 +202,15 @@ const ProductsList = () => {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button onClick={() => setEditProduct(null)}>Cancel</Button>
+                    <Button onClick={() => setEditProduct(null)}>
+                        {t('common.cancel')}
+                    </Button>
                     <Button 
                         onClick={handleUpdate} 
                         variant="contained"
                         disabled={!editedData.name || !editedData.price}
                     >
-                        Save
+                        {t('common.save')}
                     </Button>
                 </DialogActions>
             </Dialog>

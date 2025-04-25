@@ -12,12 +12,14 @@ import './OrderForm.css';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
+import { useTranslation } from 'react-i18next';
 
 // Import JSON data
 import wilayasData from '../../../data/wilayas.json';
 import communesData from '../../../data/communes.json';
 
 const OrderForm = () => {
+  const { t } = useTranslation();
   const { productId } = useParams();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -174,24 +176,26 @@ const OrderForm = () => {
     }));
   };
 
-  if (!product) return <div className="loading">Loading product details...</div>;
+  if (!product) return <div className="loading">{t('orderForm.loading')}</div>;
 
   return (
     <div className="order-form-container">
-      <h2>Complete Your Order</h2>
+      <h2>{t('orderForm.title')}</h2>
       <div className="product-info">
         <h3>{product.name}</h3>
         <p>{product.description}</p>
-        <p className="price">{formatPrice(product.price)} DZD (per unit)</p>
+        <p className="price">
+          {formatPrice(product.price)} {t('orderForm.currency')}
+        </p>
         <p className={`stock ${availableStock === 0 ? 'out-of-stock' : ''}`}>
-          Available: {formatNumber(availableStock)} units
+          {t('orderForm.available')}: {formatNumber(availableStock)} {t('orderForm.units')}
         </p>
       </div>
 
       <form onSubmit={handleSubmit}>
         <div className="form-row">
           <TextField
-            label="First Name"
+            label={t('orderForm.fields.firstName')}
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
@@ -200,7 +204,7 @@ const OrderForm = () => {
             margin="normal"
           />
           <TextField
-            label="Last Name"
+            label={t('orderForm.fields.lastName')}
             name="lastName"
             value={formData.lastName}
             onChange={handleChange}
@@ -211,7 +215,7 @@ const OrderForm = () => {
         </div>
 
         <TextField
-          label="Phone Number"
+          label={t('orderForm.fields.phone')}
           name="phone"
           type="tel"
           value={formData.phone}
@@ -221,10 +225,9 @@ const OrderForm = () => {
           margin="normal"
         />
 
-        {/* Wilaya Selection */}
         <TextField
           select
-          label="Wilaya"
+          label={t('orderForm.fields.wilaya')}
           name="wilaya"
           value={formData.wilaya}
           onChange={handleChange}
@@ -234,15 +237,14 @@ const OrderForm = () => {
         >
           {wilayasData.map((wilaya) => (
             <MenuItem key={wilaya.id} value={wilaya.id}>
-              {wilaya.name} ({wilaya.ar_name})
+              {t('locale') === 'ar' ? wilaya.ar_name : wilaya.name}
             </MenuItem>
           ))}
         </TextField>
 
-        {/* Commune Selection */}
         <TextField
           select
-          label="Commune"
+          label={t('orderForm.fields.commune')}
           name="commune"
           value={formData.commune}
           onChange={handleChange}
@@ -259,7 +261,7 @@ const OrderForm = () => {
         </TextField>
 
         <TextField
-          label="Address"
+          label={t('orderForm.fields.address')}
           name="address"
           value={formData.address}
           onChange={handleChange}
@@ -271,7 +273,7 @@ const OrderForm = () => {
         />
 
         <TextField
-          label="Quantity"
+          label={t('orderForm.fields.quantity')}
           name="quantity"
           type="text"
           value={formData.quantity}
@@ -287,13 +289,13 @@ const OrderForm = () => {
           error={formData.quantity > availableStock}
           helperText={
             formData.quantity > availableStock 
-              ? `Maximum ${formatNumber(availableStock)} items available`
+              ? t('orderForm.errors.maxQuantity', { max: formatNumber(availableStock) })
               : ''
           }
         />
 
         <div className="delivery-section">
-          <h4>Delivery Type</h4>
+          <h4>{t('orderForm.delivery.title')}</h4>
           <div className="delivery-options">
             <label>
               <input
@@ -303,7 +305,7 @@ const OrderForm = () => {
                 checked={formData.deliveryType === 'home'}
                 onChange={handleChange}
               />
-              Home Delivery
+              {t('orderForm.delivery.options.home')}
             </label>
             <label>
               <input
@@ -313,18 +315,18 @@ const OrderForm = () => {
                 checked={formData.deliveryType === 'center'}
                 onChange={handleChange}
               />
-              Delivery Center
+              {t('orderForm.delivery.options.center')}
             </label>
           </div>
         </div>
 
         {availableStock > 0 && (
           <div className="order-summary">
-            <h4>Order Summary</h4>
-            <p>Unit Price: {formatPrice(product.price)} DZD</p>
-            <p>Quantity: {formatNumber(formData.quantity)}</p>
+            <h4>{t('orderForm.summary.title')}</h4>
+            <p>{t('orderForm.summary.unitPrice')}: {formatPrice(product.price)} {t('orderForm.currency')}</p>
+            <p>{t('orderForm.summary.quantity')}: {formatNumber(formData.quantity)}</p>
             <p className="total-price">
-              Total: {formatPrice(product.price * formData.quantity)} DZD
+              {t('orderForm.summary.total')}: {formatPrice(product.price * formData.quantity)} {t('orderForm.currency')}
             </p>
           </div>
         )}
@@ -339,8 +341,11 @@ const OrderForm = () => {
           disabled={isSubmitting || availableStock === 0}
           sx={{ mt: 3, mb: 2 }}
         >
-          {availableStock === 0 ? 'Out of Stock' : 
-           isSubmitting ? 'Processing...' : 'Place Order'}
+          {availableStock === 0 
+            ? t('orderForm.buttons.outOfStock')
+            : isSubmitting 
+              ? t('orderForm.buttons.processing')
+              : t('orderForm.buttons.placeOrder')}
         </Button>
       </form>
     </div>

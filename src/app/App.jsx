@@ -17,9 +17,18 @@ import Unauthorized from "@/components/Unauthorized/Unauthorized";
 import { AuthProvider } from '@/context/AuthContext';
 import Dashboard from "@/features/admin/Dashboard/Dashboard";
 // import './App.css'; // For loading spinner styles
+import { useEffect } from 'react';
+
+import { useTranslation } from 'react-i18next';
+import '@/config/i18n';
 
 function App() {
+  const { i18n } = useTranslation();
 
+  useEffect(() => {
+    document.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
+  }, [i18n.language]);
+  
     return (
       <AuthProvider>
         <Router>

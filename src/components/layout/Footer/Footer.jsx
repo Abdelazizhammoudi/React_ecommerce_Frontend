@@ -1,16 +1,19 @@
 import React from "react";
-import { Link } from "react-router-dom"; // Import Link for navigation
+import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 import "@/styles/global.css";
-import "./footer.css"; // Component-specific styles
+import "./footer.css";
 
 function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className="footer">
-      <p>&copy; 2025 My Shop. All rights reserved.</p>
-      <p>Made with ❤️ by Abdelaziz HAMMOUDI</p>
+      <p>{t('footer.rights')}</p>
+      <p>{t('footer.madeBy')}</p>
       <p>
         <Link to="/admin/login" className="admin-login-link">
-          Admin
+          {t('footer.admin')}
         </Link>
       </p>
     </footer>

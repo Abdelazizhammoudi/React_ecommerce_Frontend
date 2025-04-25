@@ -140,3 +140,20 @@
     grid-template-columns: 1fr; /* 1 item per row on extra small screens */
   }
 }
+
+[dir="rtl"] .home-container {
+  text-align: right;
+}
+
+[dir="rtl"] .product-info-home {
+  text-align: right;
+}
+
+[dir="rtl"] .cover-description {
+  text-align: right;
+}
+
+[dir="rtl"] .product-price {
+  direction: ltr;
+  display: inline-block;
+}

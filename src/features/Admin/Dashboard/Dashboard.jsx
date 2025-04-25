@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { Grid, Card, CardContent, Typography, Button, Box } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import OrderList from '@/features/Order/OrderList/OrderList';
 import ProductsList from '@/features/product/components/ProductList/ProductList';
 import './Dashboard.css';
 
 const Dashboard = () => {
     const [activeView, setActiveView] = useState('overview');
+    const { t } = useTranslation();
 
     return (
         <Box className="dashboard-container">
             <Typography variant="h3" className="dashboard-title">
-                Admin Dashboard
+                {t('dashboard.title')}
             </Typography>
             
             {activeView === 'overview' && (
@@ -19,7 +21,7 @@ const Dashboard = () => {
                         <Card elevation={3} className="dashboard-card">
                             <CardContent className="card-content">
                                 <Typography variant="h5" className="card-title">
-                                    Orders
+                                    {t('dashboard.cards.orders.title')}
                                 </Typography>
                                 <Button 
                                     variant="contained" 
@@ -27,7 +29,7 @@ const Dashboard = () => {
                                     className="manage-button"
                                     fullWidth
                                 >
-                                    Manage Orders
+                                    {t('dashboard.cards.orders.manage')}
                                 </Button>
                             </CardContent>
                         </Card>
@@ -37,7 +39,7 @@ const Dashboard = () => {
                         <Card elevation={3} className="dashboard-card">
                             <CardContent className="card-content">
                                 <Typography variant="h5" className="card-title">
-                                    Products
+                                    {t('dashboard.cards.products.title')}
                                 </Typography>
                                 <Button 
                                     variant="contained" 
@@ -45,7 +47,7 @@ const Dashboard = () => {
                                     className="manage-button"
                                     fullWidth
                                 >
-                                    Manage Products
+                                    {t('dashboard.cards.products.manage')}
                                 </Button>
                             </CardContent>
                         </Card>
@@ -60,7 +62,7 @@ const Dashboard = () => {
                         onClick={() => setActiveView('overview')}
                         className="back-button"
                     >
-                        Back to Dashboard
+                        {t('dashboard.actions.backToDashboard')}
                     </Button>
                     <OrderList />
                 </div>
@@ -73,7 +75,7 @@ const Dashboard = () => {
                         onClick={() => setActiveView('overview')}
                         className="back-button"
                     >
-                        Back to Dashboard
+                        {t('dashboard.actions.backToDashboard')}
                     </Button>
                     <ProductsList />
                 </div>

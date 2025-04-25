@@ -40,3 +40,24 @@
     text-align: center;
     padding: var(--space-md);
   }
+
+  [dir="rtl"] .MuiTableCell-root {
+    text-align: right;
+  }
+  
+  [dir="rtl"] .MuiDialogTitle-root {
+    text-align: right;
+  }
+  
+  [dir="rtl"] .MuiDialogActions-root {
+    flex-direction: row-reverse;
+  }
+  
+  [dir="rtl"] .MuiButton-startIcon {
+    margin-left: 8px;
+    margin-right: -4px;
+  }
+  
+  [dir="rtl"] .MuiTableCell-head {
+    font-weight: bold;
+  }

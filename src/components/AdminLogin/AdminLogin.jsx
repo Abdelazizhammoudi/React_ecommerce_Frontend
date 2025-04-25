@@ -2,8 +2,10 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import './AdminLogin.css';
+import { useTranslation } from 'react-i18next';
 
 const AdminLogin = () => {
+  const { t } = useTranslation();
   const [credentials, setCredentials] = useState({ username: '', password: '' });
   const [error, setError] = useState('');
   const { login } = useAuth();
@@ -21,24 +23,24 @@ const AdminLogin = () => {
 
   return (
     <div className="admin-login">
-      <h2>Admin Portal</h2>
+      <h2>{t('admin.title')}</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder="Username"
+          placeholder={t('admin.username')}
           value={credentials.username}
           onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
           autoComplete="username"
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder={t('admin.password')}
           value={credentials.password}
           onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
           autoComplete="current-password"
         />
         {error && <div className="error">{error}</div>}
-        <button type="submit">Login</button>
+        <button type="submit">{t('admin.submit')}</button>
       </form>
     </div>
   );

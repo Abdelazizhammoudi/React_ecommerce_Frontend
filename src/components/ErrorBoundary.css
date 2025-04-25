@@ -1,0 +1,9 @@
+.error {
+    padding: 20px;
+    text-align: center;
+    color: #ff4444;
+  }
+  
+  [dir="rtl"] .error {
+    text-align: right;
+  }
