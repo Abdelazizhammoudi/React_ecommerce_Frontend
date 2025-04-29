@@ -1,5 +1,5 @@
 // config/constants.js
-export const BASE_URL = "hhttps://sm-shop.onrender.com";
+export const BASE_URL = "https://sm-shop.onrender.com";
 
 // Order Status Constants
 export const ORDER_STATUS = {
