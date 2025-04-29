@@ -15,7 +15,7 @@ import AdminLogin from "@/components/AdminLogin/AdminLogin";
 import AdminRoute from "@/components/AdminRoute";
 import Unauthorized from "@/components/Unauthorized/Unauthorized";
 import { AuthProvider } from '@/context/AuthContext';
-import Dashboard from "@/features/admin/Dashboard/Dashboard";
+import Dashboard from "@/features/Admin/Dashboard/Dashboard";
 // import './App.css'; // For loading spinner styles
 import { useEffect } from 'react';
 
