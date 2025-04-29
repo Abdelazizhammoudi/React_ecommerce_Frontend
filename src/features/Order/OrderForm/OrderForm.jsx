@@ -8,7 +8,7 @@ import {
   SUCCESS_MESSAGES, 
   ORDER_STATUS
 } from '@/config/constants';
-import './OrderForm.css';
+import './orderForm.css';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import Button from '@mui/material/Button';
