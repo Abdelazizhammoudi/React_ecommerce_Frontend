@@ -160,7 +160,7 @@
     "orderList": {
       "title": "Gestion des Commandes",
       "noOrders": "Aucune commande trouvée",
-      "orderNumber": "Commande #{id}",
+      "orderNumber": "Commande",
       "product": "Produit",
       "status": {
         "pending": "En attente",
@@ -171,7 +171,7 @@
         "deliver": "Livrer"
       },
       "details": {
-        "title": "Détails de la Commande #{id}",
+        "title": "Détails de la Commande #",
         "customerInfo": "Informations Client",
         "orderInfo": "Informations Commande",
         "deliveryInfo": "Informations Livraison",

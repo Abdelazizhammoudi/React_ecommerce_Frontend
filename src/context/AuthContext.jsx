@@ -19,7 +19,7 @@ export const AuthProvider = ({ children }) => {
   // Validate admin token
   const validateAdmin = async () => {
     const token = getToken();
-    console.log('Validating admin with token:', token);
+    // // console.log('Validating admin with token:', token);
 
     if (!token) {
       setLoading(false);
@@ -32,7 +32,7 @@ export const AuthProvider = ({ children }) => {
         headers: { Authorization: `Token ${token}` },
       });
 
-      console.log('Admin validation response:', response.data);
+      // // console.log('Admin validation response:', response.data);
 
       setAdmin({ isAdmin: response.data.is_admin || response.data.isAdmin, verified: true });
     } catch (error) {

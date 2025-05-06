@@ -12,11 +12,11 @@ const AdminRoute = () => {
   const { t } = useTranslation();
 
   // Log debug information
-  console.log('AdminRoute Debug:', {
-    loading,
-    token: !!token,
-    isAdmin: admin?.isAdmin,
-  });
+  // // console.log('AdminRoute Debug:', {
+  // //   loading,
+  // //   token: !!token,
+  // //   isAdmin: admin?.isAdmin,
+  // // });
 
   if (loading) {
     return <div className="admin-loading">{t('admin.route.verifying')}</div>;

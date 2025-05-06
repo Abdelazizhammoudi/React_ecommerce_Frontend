@@ -336,10 +336,10 @@ const OrderForm = () => {
         <Button 
           type="submit" 
           variant="contained" 
-          color="primary"
           fullWidth
           disabled={isSubmitting || availableStock === 0}
           sx={{ mt: 3, mb: 2 }}
+          className={`submit-button ${isSubmitting ? 'loading' : ''}`}
         >
           {availableStock === 0 
             ? t('orderForm.buttons.outOfStock')

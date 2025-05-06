@@ -174,7 +174,7 @@ const OrdersList = () => {
                 <Grid container alignItems="center" spacing={2}>
                   <Grid item xs={12} sm={3}>
                     <Typography variant="subtitle1">
-                      <strong>{t('orderList.orderNumber', { id: order.id })}</strong>
+                      <strong>{t('orderList.orderNumber')} #{order.id }</strong>
                     </Typography>
                     <Typography variant="body2">
                       {order.firstName} {order.lastName}
@@ -232,8 +232,9 @@ const OrdersList = () => {
         maxWidth="md"
         fullWidth
       >
+      {selectedOrder && (
         <DialogTitle>
-          {t('orderList.details.title', { id: selectedOrder?.id })}
+          {t('orderList.details.title')}{selectedOrder.id }
           <Button 
             onClick={handleCloseDetails}
             sx={{ position: 'absolute', right: 8, top: 8 }}
@@ -241,6 +242,7 @@ const OrdersList = () => {
             <CloseIcon />
           </Button>
         </DialogTitle>
+      )}
         <DialogContent dividers>
           {selectedOrder && (
             <Grid container spacing={3}>
@@ -264,7 +266,7 @@ const OrdersList = () => {
                 </Typography>
                 <Typography><strong>{t('orderList.details.productId')}:</strong> #{selectedOrder.product}</Typography>
                 <Typography><strong>{t('orderList.details.quantity')}:</strong> {selectedOrder.quantity}</Typography>
-                <Typography><strong>{t('orderList.details.totalPrice')}:</strong> {selectedOrder.total_price} {t('common.currency')}</Typography>
+                <Typography><strong>{t('orderList.details.totalPrice')}:</strong> {selectedOrder.total_price} {t('orderForm.currency')}</Typography>
               </Grid>
 
               <Grid item xs={12} md={6}>
@@ -290,7 +292,7 @@ const OrdersList = () => {
           )}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseDetails}>{t('common.close')}</Button>
+          <Button onClick={handleCloseDetails}>{t('orderDetail.actions.close')}</Button>
         </DialogActions>
       </Dialog>
     </Box>

@@ -24,20 +24,20 @@ const useFetch = (endpoint, method = 'GET', body = null) => {
                 options.body = JSON.stringify(body);
             }
 
-            console.log("Fetching:", `${BASE_URL}${endpoint}`, options); // Log the request details
+            // // console.log("Fetching:", `${BASE_URL}${endpoint}`, options); // Log the request details
 
             const response = await fetch(`${BASE_URL}${endpoint}`, options);
 
-            console.log("Response status:", response.status); // Log the response status
+            // // console.log("Response status:", response.status); // Log the response status
 
             if (!response.ok) {
                 const errorData = await response.json();
-                console.error("Error response data:", errorData); // Log the error response data
+                // // console.error("Error response data:", errorData); // Log the error response data
                 throw new Error(errorData.detail || `HTTP error! status: ${response.status}`);
             }
 
             const result = await response.json();
-            console.log("Fetched data:", result); // Log the fetched data
+            // // console.log("Fetched data:", result); // Log the fetched data
             setData(result);
         } catch (err) {
             if (err.name !== 'AbortError') {

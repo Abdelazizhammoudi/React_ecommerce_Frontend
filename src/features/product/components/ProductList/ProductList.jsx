@@ -119,7 +119,7 @@ const ProductsList = () => {
                         <TableRow>
                             <TableCell>{t('productList.table.id')}</TableCell>
                             <TableCell>{t('productList.table.name')}</TableCell>
-                            <TableCell>{t('productList.table.price', { currency: t('common.currency') })}</TableCell>
+                            <TableCell>{t('productList.table.price', { currency: t('home.products.currency') })}</TableCell>
                             <TableCell>{t('productList.table.stock')}</TableCell>
                             <TableCell>{t('productList.table.actions')}</TableCell>
                         </TableRow>

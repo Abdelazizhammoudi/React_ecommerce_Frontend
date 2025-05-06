@@ -69,7 +69,7 @@ function ProductDetail() {
         <h2>{product.name}</h2>
         <p>{product.description}</p>
         <p className="price">
-          {product.price} {t('common.currency')}
+          {product.price} {t('home.products.currency')}
         </p>
       </div>
 

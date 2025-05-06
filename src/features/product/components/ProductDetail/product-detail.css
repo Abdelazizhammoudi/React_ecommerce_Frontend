@@ -34,24 +34,24 @@
 }
 
 .product-info h2 {
-  font-size: 18px; /* Reduced font size */
+  font-size: 20px !important; /* Reduced font size */
   margin-bottom: 0.5rem; /* Reduced margin */
   font-weight: bold;
-  color: #333;
+  color: var(--primary-color) !important;
 }
 
 .product-info p {
-  font-size: 16px; /* Reduced font size */
-  color: var(--text-dark);
-  margin-bottom: 0.5rem; /* Reduced margin */
-  line-height: 1.4; /* Adjusted line height */
+  font-size: 16px  !important; /* Reduced font size */
+  color: var(--text-dark)  !important;
+  margin-bottom: 0.5rem  !important;  /* Reduced margin */
+  line-height: 1.4  !important; /* Adjusted line height */
 }
 
 .product-info .price {
-  font-size: 18px; /* Slightly reduced font size */
-  font-weight: bold;
-  color: var(--primary-color);
-  margin-bottom: 0; /* Remove margin */
+  font-size: 30px !important; /* Slightly reduced font size */
+  font-weight: bold  !important;
+  color: var(--primary-color) !important;
+  margin-bottom: 0 ; /* Remove margin */
 }
 
 /* Navigation buttons for images */

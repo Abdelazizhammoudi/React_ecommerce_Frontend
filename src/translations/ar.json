@@ -160,7 +160,7 @@
     "orderList": {
       "title": "إدارة الطلبات",
       "noOrders": "لا توجد طلبات",
-      "orderNumber": "طلب رقم {id}#",
+      "orderNumber": "طلب رقم",
       "product": "المنتج",
       "status": {
         "pending": "قيد الانتظار",
@@ -171,7 +171,7 @@
         "deliver": "تسليم"
       },
       "details": {
-        "title": "تفاصيل الطلب رقم {id}#",
+        "title": "تفاصيل الطلب رقم #",
         "customerInfo": "معلومات العميل",
         "orderInfo": "معلومات الطلب",
         "deliveryInfo": "معلومات التوصيل",

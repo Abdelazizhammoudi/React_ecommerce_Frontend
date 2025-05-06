@@ -23,24 +23,24 @@ const AdminLogin = () => {
 
   return (
     <div className="admin-login">
-      <h2>{t('admin.title')}</h2>
+      <h2>{t('admin.login.title')}</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          placeholder={t('admin.username')}
+          placeholder={t('admin.login.username')}
           value={credentials.username}
           onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
           autoComplete="username"
         />
         <input
           type="password"
-          placeholder={t('admin.password')}
+          placeholder={t('admin.login.password')}
           value={credentials.password}
           onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
           autoComplete="current-password"
         />
         {error && <div className="error">{error}</div>}
-        <button type="submit">{t('admin.submit')}</button>
+        <button type="submit">  {t('admin.login.submit')} </button>
       </form>
     </div>
   );
