@@ -1,12 +1,13 @@
 :root {
     /* Colors */
     --primary-color: rgb(0, 128, 128);    /* Teal Green */
-    --primary-hover: rgb(0, 105, 105); /* Darker shade for hover */
+    --primary-hover: rgb(4, 149, 149); /* Darker shade for hover */
+    --secondary-hover: rgba(184, 246, 246, 0.9);
     --secondary-color: rgb(145, 199, 198);           /* Khaki */
     --danger-color: #ff4444;              
     --background-light: #f0f8ff;          /* Light blue background */
     --text-dark: #333;
-    
+
     /* Fonts */
     --font-primary: 'Arial', sans-serif;
     

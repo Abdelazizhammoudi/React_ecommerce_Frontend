@@ -2,11 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Align the form to the top */
-  height: 100%;
+  justify-content: flex-start;
+  min-height: calc(100vh - 200px); /* Adjust based on footer height */
+  padding: var(--space-lg) 0 100px; /* Adds 100px bottom padding */
   background-color: var(--background-light);
   font-family: var(--font-primary);
-  padding-top: var(--space-lg); /* Add padding to create space from the top */
+  box-sizing: border-box;
 }
 
 .admin-login h2 {
@@ -20,6 +21,7 @@
   flex-direction: column;
   width: 100%;
   max-width: 400px;
+  margin-bottom: 50px;
   background: #fff;
   padding: var(--space-lg);
   border-radius: 8px;

@@ -2,6 +2,44 @@
 // export const BASE_URL = "https://sm-shop.onrender.com";
 export const BASE_URL = "http://127.0.0.1:8000";
 
+// Language and contact Constants 
+export const APP_CONTACT = {
+  phone: "+213 658 21 63 59",
+  email: "contact@maktabatatwassol.com",
+  developerEmail: "Abdelaziz.hammoudi@univ-constantine2.dz",
+  developperPhone: "+213 676 87 65 96",
+  address: {
+    en: "Issat Idir Street, Municipal District 04300 Aïn M'Lila, Algeria",
+    fr: "Rue Issat Idir, Quartier Municipal 04300 Aïn M'Lila, Algérie",
+    ar: "شارع عيسات إيدير ، الحي البلدي 04300 عين مليلة، الجزائر"
+  },
+  mapUrl: "https://www.google.com/maps/dir/?api=1&destination=36.038708215977%2C6.5702187573853"
+  };
+
+export const STORE_NAME = {
+  en: "Maktabat At-Tawassol",
+  fr: "Maktabat At-Tawassol",
+  ar: "مكتبة التواصل"
+};
+
+export const SOCIAL_MEDIA = {
+  facebook: "https://web.facebook.com/profile.php?id=100083080521256",
+  instagram: "https://www.instagram.com/bareche_oussama",
+  whatsapp: "https://wa.me/+213658216359"
+};
+
+export const FOOTER_LINKS = {
+  catalogue: [
+    { title: "Watches", path: "/watches" },
+    // Add more catalogue items
+  ],
+  about: [
+    { title: "Our Story", path: "/about" },
+    { title: "Our Stores", path: "/stores" }
+  ]
+};
+
+
 // Order Status Constants
 export const ORDER_STATUS = {
   PENDING: 'pending',

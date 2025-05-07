@@ -10,9 +10,17 @@
       "logoAlt": "Logo du Magasin"
     },
     "footer": {
-      "rights": "© 2025 My Shop. Tous droits réservés.",
-      "madeBy": "Fait avec ❤️ par Abdelaziz HAMMOUDI",
-      "admin": "Admin"
+      "about": "À propos de nous",
+      "ourStory": "Notre adresse : Nouveautés quotidiennes, si Dieu le veut\nDisponible les chemises les plus luxueuses du marché\nFournitures pour le Hajj et la Omra, parfums originaux émiratis et saoudiens\nLivraison disponible - Paiement à la livraison\nNous sommes heureux d'offrir le meilleur service à nos clients précieux",
+      "contact": "Contact",
+      "terms": "Conditions d'utilisation",
+      "privacy": "Politique de confidentialité",
+      "admin": "Connexion administrateur",
+      "rights": "© Tous droits réservés.",
+      "madeBy": "Développé par HAMMOUDI Abdelaziz",
+      "followUs": "Suivez-nous",
+      "ourStores": "Adresse",
+      "ContactDev": "Contacter le développeur : "
     },
     "admin": {
       "login": {

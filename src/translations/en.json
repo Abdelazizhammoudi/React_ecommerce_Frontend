@@ -10,10 +10,17 @@
       "logoAlt": "Shop Logo"
     },
     "footer": {
-      "rights": "© 2025 My Shop. All rights reserved.",
-      "madeBy": "Made with ❤️ by Abdelaziz HAMMOUDI",
-      "admin": "Admin"
-    },
+      "about": "About Us",
+      "ourStory": "Our Address: New arrivals every day, God willing\nAvailable the most luxurious shirts in the market\nFor Hajj and Umrah supplies, original Emirati and Saudi perfumes\nDelivery available - Cash on delivery\nWe are happy to provide the best service to our valued customers",
+      "contact": "Contact",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy",
+      "admin": "Admin Login",
+      "rights": "© All rights reserved.",
+      "madeBy": "Developed by HAMMOUDI Abdelaziz",
+      "followUs": "Follow Us",
+      "ContactDev": "Contact the developer : "
+      },
     "admin": {
       "login": {
         "title": "Admin Login",
