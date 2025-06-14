@@ -12,10 +12,10 @@
 /* Cover Section */
 .cover-section {
   position: relative;
-  width: 100%;
-  height: 300px;
+  width: 1040px;
+  height: 460px;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 20px;
   margin-bottom: var(--space-lg);
 }
 
@@ -47,6 +47,7 @@
 
 .product-card {
   height: 390px;
+  width: fit-content !important;
   background: white;
   border-radius: 8px;
   padding: var(--space-md);
@@ -145,23 +146,93 @@
 @media (min-width: 1200px) and (max-width: 1399px) {
   .product-list {
     grid-template-columns: repeat(4, 1fr);
+
   }
+  /* .cover-section {
+    position: relative;
+    width: 816px;
+    height: 584px;
+    overflow: hidden;
+    border-radius: 20px;
+    margin-bottom: var(--space-lg);
+}
+  .cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+  } */
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
   .product-list {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .cover-section { 
+    position: relative;
+    width: 816px;
+    height: 484px;
+    overflow: hidden;
+    border-radius: 20px;
+    margin-bottom: var(--space-lg);
+}
+
+  .cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
   }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
   .product-list {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+  }
+    .cover-section {
+    position: relative;
+    width: 716px;
+    height: 484px;
+    overflow: hidden;
+    border-radius: 20px;
+    margin-bottom: var(--space-lg);
+}
+  
+  .cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
   }
 }
 
 @media (max-width: 767px) {
   .product-list {
     grid-template-columns: 1fr;
+    /* Center cards in their grid cells */
+    justify-items: center;      /* Center cards in their grid cells */
+    justify-content: center;  
+  }
+  product-card {
+    /* width: 100%; */
+    max-width: 330px !important; 
+  }
+  .cover-section {
+    position: relative;
+    width: 366px;
+    height: 234px;
+    overflow: hidden;
+    border-radius: 20px;
+    margin-bottom: var(--space-lg);
+}
+
+  .cover-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
   }
 }
+
+
+
