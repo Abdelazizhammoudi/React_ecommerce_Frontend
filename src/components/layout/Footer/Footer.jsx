@@ -13,7 +13,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-content">
         {/* Store Information */}
-        <div className="footer-section">
+        {/* <div className="footer-section">
           <h3 className="store-name">{STORE_NAME[i18n.language]}</h3>
           <div className="store-info">
             <Room className="location-icon" />
@@ -26,10 +26,10 @@ function Footer() {
               {APP_CONTACT.address[i18n.language]}
             </a>
           </div>
-        </div>
+        </div> */}
 
         {/* Contact Section */}
-        <div className="footer-section">
+        {/* <div className="footer-section">
           <h4>{t('footer.contact')}</h4>
           <div className="contact-info">
             <p>
@@ -44,11 +44,11 @@ function Footer() {
             </p>
             <p>{APP_CONTACT.email}</p>
           </div>
-        </div>
+        </div> */}
 
         {/* Social Media */}
         <div className="footer-section">
-          <h4>{t('footer.followUs')}</h4>
+          <h4 className="follow">{t('footer.followUs')}</h4>
           <div className="social-icons">
             <a href={SOCIAL_MEDIA.facebook} target="_blank" rel="noopener noreferrer">
               <Facebook className="social-icon" />
@@ -63,7 +63,7 @@ function Footer() {
         </div>
 
         {/* Contact Developer Section */}
-        <div className="footer-section">
+        {/* <div className="footer-section">
           <h4>{t('footer.ContactDev')}</h4>
           <div className="contact-developer">
               <div>
@@ -87,8 +87,8 @@ function Footer() {
                 </a>
               </div>
           </div>
-        </div>
-        </div>
+        </div> 
+       </div> */}
       </div>
 
       {/* Copyright Section */}
